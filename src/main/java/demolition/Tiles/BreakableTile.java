@@ -7,7 +7,7 @@ import processing.core.PImage;
 public class BreakableTile extends Tile {
     public static PImage sprite;
 
-    public BreakableTile(float x, float y) {
+    public BreakableTile(int x, int y) {
         super(x, y);
     }
     public boolean isBreakable() {
@@ -16,15 +16,8 @@ public class BreakableTile extends Tile {
     public boolean stopsExplosions() {
         return true;
     }
-
     public boolean isPassable() {
         return false;
-    }
-
-    public boolean explode() {
-        //TODO Need to replace the tile xx
-        Tile replacement = new EmptyTile(x,y);
-        return true;
     }
 
     public void draw(PApplet app) {

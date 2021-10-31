@@ -53,8 +53,6 @@ public abstract class Moveable extends PApplet implements VulnerableToExplosion 
         return false;
     }
 
-    public boolean explode() {
-        return loseLife();
-    }
-    public abstract boolean loseLife();
+    public abstract boolean explode();
+
 }

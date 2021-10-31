@@ -6,12 +6,12 @@ import processing.core.PImage;
 public class EmptyTile extends Tile{
     public static PImage sprite;
 
-    public EmptyTile(float x, float y) {
+    public EmptyTile(int x, int y) {
         super(x, y);
     }
 
     public boolean isBreakable() {
-        return false;
+        return true;
     }
 
     public boolean stopsExplosions() {
@@ -22,9 +22,6 @@ public class EmptyTile extends Tile{
         return true;
     }
 
-    public boolean explode() {
-        return true;
-    }
     public void draw(PApplet app) {
         app.image(EmptyTile.sprite, this.x, this.y);
     }

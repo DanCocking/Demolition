@@ -7,12 +7,12 @@ import processing.core.PImage;
 public class GoalTile extends Tile {
     public static PImage sprite;
 
-    public GoalTile(float x, float y) {
+    public GoalTile(int x, int y) {
         super(x, y);
     }
 
     public boolean isBreakable() {
-        return true;
+        return false;
     }
 
     public boolean stopsExplosions() {
@@ -23,9 +23,6 @@ public class GoalTile extends Tile {
         return true;
     }
 
-    public boolean explode() {
-        return true;
-    }
     public void draw(PApplet app) {
         app.image(GoalTile.sprite, this.x, this.y);
     }

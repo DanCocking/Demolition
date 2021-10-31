@@ -11,9 +11,9 @@ public class Player extends Moveable implements Displayed{
     public PImage currSprite;
     static PImage[][] sprites = new PImage[4][4];
 
-    public Player(int x, int y) {
+    public Player(int x, int y, int lives) {
         super(x,y);
-
+        this.lives = lives;
     }
 
     public void setSprite(PImage sprite) {
@@ -45,14 +45,24 @@ public class Player extends Moveable implements Displayed{
     }
 
 
-    public boolean explode() {
+    public boolean loseLife(GameController gameController) {
+        // TODO Auto-generated method stub
         lives--;
+        gameController.reMap();
         return true;
     }
 
-    @Override
-    public boolean loseLife() {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean explode() {
+         return false;
+    }
+
+
+    public void dropBomb(Map map) {
+        for (Bomb bomb : map.bombs) {
+            if (bomb.x == x && bomb.y == y + 16) {
+                return;
+            }
+        }
+        Bomb bomb = new Bomb(x, y, map);
     }
 }

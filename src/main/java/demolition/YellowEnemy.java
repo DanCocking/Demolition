@@ -48,4 +48,7 @@ public class YellowEnemy extends Enemy {
             currSprite = sprites[3][spriteNum];
         }
     }
+    public boolean explode() {
+        return loseLife();
+    }
 }

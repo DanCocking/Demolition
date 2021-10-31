@@ -7,7 +7,7 @@ import processing.core.PImage;
 public class SolidTile extends Tile {
     public static PImage sprite;
 
-    public SolidTile(float x, float y) {
+    public SolidTile(int x, int y) {
         super(x, y);
     }
 
@@ -23,9 +23,6 @@ public class SolidTile extends Tile {
         return false;
     }
 
-    public boolean explode() {
-        return false;
-    }
 
     public void draw(PApplet app) {
         app.image(SolidTile.sprite, this.x, this.y);

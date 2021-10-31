@@ -39,7 +39,6 @@ public abstract class Enemy extends Moveable implements Displayed{
 
     public abstract void tick();
 
-    @Override
     public boolean loseLife() {
         alive = false;
         return true;
