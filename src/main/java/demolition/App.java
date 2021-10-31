@@ -14,17 +14,17 @@ public class App extends PApplet {
 
     public static final int FPS = 60;
 
-    private Player player;
+    public Player player;
+
     private Map map;
     private boolean[] pressedKeys = new boolean[4];
 
 
 
     public App() {
-        this.player = new Player(32, 96);
-
         //TODO can only show a single level.
-        this.map = new Map("level1.txt");
+        this.map = new Map("level1.txt", this);
+
     }
 
     public void settings() {
@@ -37,25 +37,71 @@ public class App extends PApplet {
 
         //load Player
         // left
-        player.sprites[0][0] = this.loadImage("src/main/resources/player/player_left1.png");
-        player.sprites[0][1] = this.loadImage("src/main/resources/player/player_left2.png");
-        player.sprites[0][2] = this.loadImage("src/main/resources/player/player_left3.png");
-        player.sprites[0][3] = this.loadImage("src/main/resources/player/player_left4.png");
+        Player.sprites[0][0] = this.loadImage("src/main/resources/player/player_left1.png");
+        Player.sprites[0][1] = this.loadImage("src/main/resources/player/player_left2.png");
+        Player.sprites[0][2] = this.loadImage("src/main/resources/player/player_left3.png");
+        Player.sprites[0][3] = this.loadImage("src/main/resources/player/player_left4.png");
         // up
-        player.sprites[1][0] = this.loadImage("src/main/resources/player/player_up1.png");
-        player.sprites[1][1] = this.loadImage("src/main/resources/player/player_up2.png");
-        player.sprites[1][2] = this.loadImage("src/main/resources/player/player_up3.png");
-        player.sprites[1][3] = this.loadImage("src/main/resources/player/player_up4.png");
+        Player.sprites[1][0] = this.loadImage("src/main/resources/player/player_up1.png");
+        Player.sprites[1][1] = this.loadImage("src/main/resources/player/player_up2.png");
+        Player.sprites[1][2] = this.loadImage("src/main/resources/player/player_up3.png");
+        Player.sprites[1][3] = this.loadImage("src/main/resources/player/player_up4.png");
         // right
-        player.sprites[2][0] = this.loadImage("src/main/resources/player/player_right1.png");
-        player.sprites[2][1] = this.loadImage("src/main/resources/player/player_right2.png");
-        player.sprites[2][2] = this.loadImage("src/main/resources/player/player_right3.png");
-        player.sprites[2][3] = this.loadImage("src/main/resources/player/player_right4.png");
+        Player.sprites[2][0] = this.loadImage("src/main/resources/player/player_right1.png");
+        Player.sprites[2][1] = this.loadImage("src/main/resources/player/player_right2.png");
+        Player.sprites[2][2] = this.loadImage("src/main/resources/player/player_right3.png");
+        Player.sprites[2][3] = this.loadImage("src/main/resources/player/player_right4.png");
         // down
-        player.sprites[3][0] = this.loadImage("src/main/resources/player/player1.png");
-        player.sprites[3][1] = this.loadImage("src/main/resources/player/player2.png");
-        player.sprites[3][2] = this.loadImage("src/main/resources/player/player3.png");
-        player.sprites[3][3] = this.loadImage("src/main/resources/player/player4.png");
+        Player.sprites[3][0] = this.loadImage("src/main/resources/player/player1.png");
+        Player.sprites[3][1] = this.loadImage("src/main/resources/player/player2.png");
+        Player.sprites[3][2] = this.loadImage("src/main/resources/player/player3.png");
+        Player.sprites[3][3] = this.loadImage("src/main/resources/player/player4.png");
+
+
+
+        // Red Enemy
+        // left
+        RedEnemy.sprites[0][0] = this.loadImage("src/main/resources/red_enemy/red_left1.png");
+        RedEnemy.sprites[0][1] = this.loadImage("src/main/resources/red_enemy/red_left2.png");
+        RedEnemy.sprites[0][2] = this.loadImage("src/main/resources/red_enemy/red_left3.png");
+        RedEnemy.sprites[0][3] = this.loadImage("src/main/resources/red_enemy/red_left4.png");
+        // upred_enemyred
+        RedEnemy.sprites[1][0] = this.loadImage("src/main/resources/red_enemy/red_up1.png");
+        RedEnemy.sprites[1][1] = this.loadImage("src/main/resources/red_enemy/red_up2.png");
+        RedEnemy.sprites[1][2] = this.loadImage("src/main/resources/red_enemy/red_up3.png");
+        RedEnemy.sprites[1][3] = this.loadImage("src/main/resources/red_enemy/red_up4.png");
+        // rightred_enemyred
+        RedEnemy.sprites[2][0] = this.loadImage("src/main/resources/red_enemy/red_right1.png");
+        RedEnemy.sprites[2][1] = this.loadImage("src/main/resources/red_enemy/red_right2.png");
+        RedEnemy.sprites[2][2] = this.loadImage("src/main/resources/red_enemy/red_right3.png");
+        RedEnemy.sprites[2][3] = this.loadImage("src/main/resources/red_enemy/red_right4.png");
+        // downred_enemyred
+        RedEnemy.sprites[3][0] = this.loadImage("src/main/resources/red_enemy/red_down1.png");
+        RedEnemy.sprites[3][1] = this.loadImage("src/main/resources/red_enemy/red_down2.png");
+        RedEnemy.sprites[3][2] = this.loadImage("src/main/resources/red_enemy/red_down3.png");
+        RedEnemy.sprites[3][3] = this.loadImage("src/main/resources/red_enemy/red_down4.png");
+
+        // Yellow Enemy
+        // left
+        YellowEnemy.sprites[0][0] = this.loadImage("src/main/resources/yellow_enemy/yellow_left1.png");
+        YellowEnemy.sprites[0][1] = this.loadImage("src/main/resources/yellow_enemy/yellow_left2.png");
+        YellowEnemy.sprites[0][2] = this.loadImage("src/main/resources/yellow_enemy/yellow_left3.png");
+        YellowEnemy.sprites[0][3] = this.loadImage("src/main/resources/yellow_enemy/yellow_left4.png");
+
+        YellowEnemy.sprites[1][0] = this.loadImage("src/main/resources/yellow_enemy/yellow_up1.png");
+        YellowEnemy.sprites[1][1] = this.loadImage("src/main/resources/yellow_enemy/yellow_up2.png");
+        YellowEnemy.sprites[1][2] = this.loadImage("src/main/resources/yellow_enemy/yellow_up3.png");
+        YellowEnemy.sprites[1][3] = this.loadImage("src/main/resources/yellow_enemy/yellow_up4.png");
+
+        YellowEnemy.sprites[2][0] = this.loadImage("src/main/resources/yellow_enemy/yellow_right1.png");
+        YellowEnemy.sprites[2][1] = this.loadImage("src/main/resources/yellow_enemy/yellow_right2.png");
+        YellowEnemy.sprites[2][2] = this.loadImage("src/main/resources/yellow_enemy/yellow_right3.png");
+        YellowEnemy.sprites[2][3] = this.loadImage("src/main/resources/yellow_enemy/yellow_right4.png");
+
+        YellowEnemy.sprites[3][0] = this.loadImage("src/main/resources/yellow_enemy/yellow_down1.png");
+        YellowEnemy.sprites[3][1] = this.loadImage("src/main/resources/yellow_enemy/yellow_down2.png");
+        YellowEnemy.sprites[3][2] = this.loadImage("src/main/resources/yellow_enemy/yellow_down3.png");
+        YellowEnemy.sprites[3][3] = this.loadImage("src/main/resources/yellow_enemy/yellow_down4.png");
 
         // load tiles
         BreakableTile.sprite = this.loadImage("src/main/resources/broken/broken.png");
@@ -68,11 +114,7 @@ public class App extends PApplet {
     public void draw() {
         background(255, 128, 0);
         this.map.tick();
-        this.player.tick();
         this.map.draw(this);
-        this.player.draw(this);
-
-
     }
 
     public void keyPressed() {

@@ -2,19 +2,18 @@ package demolition;
 
 import java.util.*;
 
-import demolition.Tiles.BreakableTile;
-import demolition.Tiles.EmptyTile;
-import demolition.Tiles.GoalTile;
-import demolition.Tiles.SolidTile;
-import demolition.Tiles.Tile;
+import demolition.Tiles.*;
+
 
 import java.io.*;
 
 import processing.core.PApplet;
 public class Map implements Displayed {
     Tile[][] levelMap;
+    ArrayList<Displayed> drawables = new ArrayList<>();
+    Player player;
 
-    public Map(String path) {
+    public Map(String path, App app) {
         File file = new File(path);
         Scanner scanner;
         try {
@@ -30,8 +29,8 @@ public class Map implements Displayed {
             Tile[] rowMap = new Tile[15];
             int column = 0;
             for (char character : line.toCharArray()) {
-                float x = column * 32;
-                float y = 64 + row * 32;
+                int x = column * 32;
+                int y = 64 + row * 32;
                 Tile tile;
 
                 if (character == 'W') {
@@ -45,6 +44,19 @@ public class Map implements Displayed {
                     tile = new EmptyTile(x, y);
                 } else  {
                     tile = new EmptyTile(x, y);
+                    if (character == 'P') {
+                        Player player = new Player(x, y-16);
+                        app.player = player;
+                        this.player = player;
+                    } else if (character == 'R') {
+                        RedEnemy red = new RedEnemy(x, y-16);
+                        red.setMap(this);
+                        drawables.add(red);
+                    } else if (character == 'Y') {
+                        YellowEnemy yellow = new YellowEnemy(x, y-16);
+                        yellow.setMap(this);
+                        drawables.add(yellow);
+                    }
                 }
                 rowMap[column] = tile;
                 column++;
@@ -63,7 +75,15 @@ public class Map implements Displayed {
 
 
     public void tick() {
-
+        for (Tile[] tiles : levelMap) {
+            for (Tile tile : tiles) {
+                tile.tick();
+            }
+        }
+        player.tick();
+        for (Displayed disp : drawables) {
+            disp.tick();
+        }
     }
 
     public void draw(PApplet app) {
@@ -73,7 +93,11 @@ public class Map implements Displayed {
                 levelMap[i][j].draw(app);
                 // System.out.print(levelMap[i][j] == null);
                 }
-                System.out.println();
         }
+        for (Displayed img : drawables ) {
+            img.draw(app);
+        }
+        player.draw(app);
+
     }
 }

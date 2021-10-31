@@ -3,14 +3,17 @@ package demolition;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Player extends Moveable implements VulnerableToExplosion, Displayed{
+public class Player extends Moveable implements Displayed{
     public int lives = 3;
     public int spriteNum = 0;
     public int timer = 0;
     public final double TIME_BETWEEN_FRAMES = 0.2;
     public PImage currSprite;
+    static PImage[][] sprites = new PImage[4][4];
+
     public Player(int x, int y) {
         super(x,y);
+
     }
 
     public void setSprite(PImage sprite) {
@@ -45,5 +48,11 @@ public class Player extends Moveable implements VulnerableToExplosion, Displayed
     public boolean explode() {
         lives--;
         return true;
+    }
+
+    @Override
+    public boolean loseLife() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
