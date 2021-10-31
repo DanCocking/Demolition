@@ -18,18 +18,26 @@ public class App extends PApplet {
     private boolean[] pressedKeys = new boolean[5];
 
 
-
+    /**
+     * Class constructor.
+     * The method initialises the Game Controller
+     */
     public App() {
         //TODO can only show a single level.
         this.gameController = new GameController("config.json", this);
         this.player = gameController.player;
-
     }
 
+    /**
+     * The method sets the size of the application
+     */
     public void settings() {
         size(WIDTH, HEIGHT);
     }
 
+    /**
+     * The method sets the framerate, loads images, loads and sets the font
+     */
     public void setup() {
         frameRate(FPS);
         // Load images during setup
@@ -38,14 +46,20 @@ public class App extends PApplet {
         textFont(press);
     }
 
+    /**
+     * Draws background and draws game controller
+     * Calls game controller's draw() method
+     */
     public void draw() {
         background(239, 129, 0);
         this.gameController.tick();
         this.gameController.draw();
-
-
     }
 
+    /**
+     * Reads keyboards input.
+     * Moves player LEFT on left key, RIGHT on right key, UP on up key, DOWN on down key and drops bomb on SPACE key.
+     */
     public void keyPressed() {
         // Left: 37
         // Up: 38
@@ -70,6 +84,10 @@ public class App extends PApplet {
         }
     }
 
+    /**
+     * Reads keyboard input to ensure that input may not be held down.
+     * Will prevent user from moving in any direction (or dropping bombs) without first releasing that key. They may give any other input whilst one is held down however.
+     */
     public void keyReleased() {
         // Left: 37
         // Up: 38
@@ -89,7 +107,10 @@ public class App extends PApplet {
     }
 
 
-
+    /**
+     * Main method ran on start
+     * @param args  the command-line arguments given
+     */
     public static void main(String[] args) {
         PApplet.main("demolition.App");
     }

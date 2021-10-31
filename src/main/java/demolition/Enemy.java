@@ -3,7 +3,9 @@ package demolition;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+
 public abstract class Enemy extends Moveable implements Displayed{
+
     public boolean alive = true;
     public int spriteNum = 0;
     public int timer = 0;
@@ -15,73 +17,40 @@ public abstract class Enemy extends Moveable implements Displayed{
     public PImage currSprite;
     public Map map;
 
-    public Enemy(int x, int y) {
+    /**
+     * Class constructor.
+     *
+     * Initialises enemy at (x,y) coordinates on map
+     *
+     * @param x    the x-coordinate of the enemy
+     * @param y    the y-coordinate of the enemy
+     * @param map  the map the enemy is placed onto
+     */
+    public Enemy(int x, int y, Map map) {
         super(x,y);
-    }
-
-    public void setMap(Map map) {
         this.map = map;
     }
 
-    public void setSprite(PImage sprite) {
-        this.currSprite = sprite;
-    }
 
-    public void draw(PApplet app) {
-        // The image() method is used to draw PImages onto the screen.
-        // The first argument is the image, the second and third arguments are coordinates
-        // if (currSprite == null) {
-        //     currSprite = sprites[3][0];
-        // }
-
+    /**
+     * Draws enemy sprite to the application window
+     * @param app   the application that is drawn to
+     */
+    public void draw(App app) {
         app.image(currSprite, x, y);
     }
 
+    /**
+     * Performs tick on enemy
+     */
     public abstract void tick();
 
+    /**
+     * Will change the enemy from alive state to not alive state and return success
+     * @return the boolean value of if the enemy is alive
+     */
     public boolean loseLife() {
         alive = false;
         return true;
     }
 }
-
-
-
-
-// moveTimer++;
-// if (moveTimer > TIME_BETWEEN_MOVES * 60) {
-//     boolean moved = false;
-
-//     while (!moved) {
-//         if (direction == Direction.left) {
-//             moved = moveLeft(map);
-//         } else if (direction == Direction.up) {
-//             moved = moveUp(map);
-//         } else if (direction == Direction.right) {
-//             moved = moveRight(map);
-//         } else if (direction == Direction.down) {
-//             moved = moveDown(map);
-//         }
-//         if (!moved) {
-//             direction = Direction.getRandomDirection();
-//         }
-//     }
-//     moveTimer = 0;
-// }
-
-
-// timer++;
-
-// if (timer > TIME_BETWEEN_FRAMES * 60) {
-//     spriteNum = ((spriteNum + 1) % 4);
-//     timer = 0;
-// }
-// if (direction == Direction.left) {
-//     currSprite = sprites[0][spriteNum];
-// } else if (direction == Direction.up) {
-//     currSprite = sprites[1][spriteNum];
-// } else if (direction == Direction.right) {
-//     currSprite = sprites[2][spriteNum];
-// } else if (direction == Direction.down) {
-//     currSprite = sprites[3][spriteNum];
-// }

@@ -4,17 +4,28 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 //TODO still need to put in things for if there is a blcok in said area; also need to stop on screen edge
-public abstract class Moveable extends PApplet implements VulnerableToExplosion {
+public abstract class Moveable extends PApplet  {
     int x;
     int y;
     Direction direction = Direction.down;
-    // PImage[][] sprites = new PImage[4][4];
 
+    /**
+     * Class constructor.
+     *
+     * Creates new Moveable at (x,y) coordinates
+     * @param x     the x-coordinate of the moveable created
+     * @param y     the y-coordinate of the moveable created
+     */
     public Moveable(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Will move the moveable one block left (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
     public boolean moveLeft(Map map) {
         direction = Direction.left;
         if (map.tileAt(x-32, y+16).isPassable()) {
@@ -24,6 +35,12 @@ public abstract class Moveable extends PApplet implements VulnerableToExplosion 
         return false;
 
     }
+
+    /**
+     * Will move the moveable one block right (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
     public boolean moveRight(Map map) {
         direction = Direction.right;
         if (map.tileAt(x+32, y+16).isPassable()) {
@@ -33,6 +50,12 @@ public abstract class Moveable extends PApplet implements VulnerableToExplosion 
         return false;
 
     }
+
+    /**
+     * Will move the moveable one block up (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
     public boolean moveUp(Map map) {
         direction = Direction.up;
 
@@ -43,6 +66,12 @@ public abstract class Moveable extends PApplet implements VulnerableToExplosion 
         return false;
 
     }
+
+    /**
+     * Will move the moveable one block down (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
     public boolean moveDown(Map map) {
         direction = Direction.down;
 
@@ -52,7 +81,5 @@ public abstract class Moveable extends PApplet implements VulnerableToExplosion 
         }
         return false;
     }
-
-    public abstract boolean explode();
 
 }

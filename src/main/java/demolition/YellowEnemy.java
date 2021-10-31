@@ -5,10 +5,22 @@ import processing.core.PImage;
 public class YellowEnemy extends Enemy {
     static PImage[][] sprites = new PImage[4][4];
 
-    YellowEnemy(int x, int y) {
-        super(x, y);
+        /**
+     * Class constructor.
+     *
+     * Initialises yellow enemy on map at (x,y) coordinates and first sprite set
+     * @param x         the x-coordinate of the YellowEnemy
+     * @param y         the y-coordinate of the YellowEnemy
+     * @param map       the map the enemy is placed onto
+     */
+    YellowEnemy(int x, int y, Map map) {
+        super(x, y, map);
         this.currSprite = sprites[3][0];
     }
+
+    /**
+     * Runs at gametick to change enemy sprites, move enemy and rotate the enemy clockwise whenever it hits a wall
+      */
     @Override
     public void tick() {
         moveTimer++;
@@ -48,7 +60,5 @@ public class YellowEnemy extends Enemy {
             currSprite = sprites[3][spriteNum];
         }
     }
-    public boolean explode() {
-        return loseLife();
-    }
+
 }

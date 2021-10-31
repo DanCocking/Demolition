@@ -21,6 +21,15 @@ public class Map implements Displayed {
     Player player;
     GameController gameController;
 
+    /**
+     * Class constructor
+     *
+     * Uses level setup file to create a map with enemies and blocks
+     *
+     * @param path              the path to level setup file
+     * @param app               the application window the map runs in
+     * @param gameController    the game controller that controls the map
+     */
     public Map(String path, App app, GameController gameController) {
         this.app = app;
         this.gameController = gameController;
@@ -59,12 +68,10 @@ public class Map implements Displayed {
                         gameController.player.x = x;
                         gameController.player.y = y - 16;
                     } else if (character == 'R') {
-                        RedEnemy red = new RedEnemy(x, y-16);
-                        red.setMap(this);
+                        RedEnemy red = new RedEnemy(x, y-16, this);
                         enemys.add(red);
                     } else if (character == 'Y') {
-                        YellowEnemy yellow = new YellowEnemy(x, y-16);
-                        yellow.setMap(this);
+                        YellowEnemy yellow = new YellowEnemy(x, y-16, this);
                         enemys.add(yellow);
                     }
                 }
@@ -79,14 +86,34 @@ public class Map implements Displayed {
 
     }
 
+    /**
+     * Returns tile at a given set of (x,y) coordinates
+     *
+     * @param x     the x-coordinate of the tile
+     * @param y     the y-coordinate of the tile
+     * @return      the Tile at the given coordinates
+     */
     public Tile tileAt(int x, int y) {
         return (levelMap[y/32 - 2][x/32]);
     }
+
+    /**
+     * Replaces tile in level map with tile supplied.
+     * The tile to be replaced is the one with the same coordinates as the one given in params
+     * @param tile  the tile that is replacing current tile of same coords
+     */
     public void setTile(Tile tile) {
         levelMap[tile.getY()/32 - 2][tile.getX()/32] = tile;
     }
 
-
+    /**
+     * Runs an ingame tick on all aspects of the map.
+     *
+     * The methods ticks all tiles, the player, enemies (the player loses a life if at same coords as them),
+     * bombs, explosions (players and enemies both lose life if at same coords), checks if player has reached
+     * goal tile and occasionally purges lists of unnecessary objects to maintain performance
+     *
+     */
     public void tick() {
         for (Tile[] tiles : levelMap) {
             for (Tile tile : tiles) {
@@ -136,7 +163,11 @@ public class Map implements Displayed {
 
     }
 
-    public void draw(PApplet app) {
+    /**
+     * Will draw blocks, bombs, enemies, explosions and player to the window
+     * @param app       the application window to be drawn to
+     */
+    public void draw(App app) {
         for (int i = 0; i < levelMap.length; i++) {
 
             for (int j = 0; j < levelMap[i].length; j++) {
@@ -163,6 +194,10 @@ public class Map implements Displayed {
 
         player.draw(app);
     }
+
+    /**
+     * Removes bombs that are exploded, explosions that are no longer present, and non alive enemies from their respective lists
+     */
     private void purge() {
         bombs.removeIf((bomb) -> (bomb.exploded));
         explosions.removeIf((explosion) -> (!explosion.burning));
@@ -170,6 +205,3 @@ public class Map implements Displayed {
 
     }
 }
-
-// Wrongful; left
-// wanted

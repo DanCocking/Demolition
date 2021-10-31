@@ -6,6 +6,10 @@ import demolition.Tiles.*;
 
 public class Images  {
 
+    /**
+     * Loads PImages to their respective classes
+     * @param app   the application to load the images
+     */
     public static void loadImages(PApplet app) {
 
         //load Player
@@ -96,7 +100,7 @@ public class Images  {
         Explosion.sprites[1] = app.loadImage("src/main/resources/explosion/horizontal.png");
         Explosion.sprites[2] = app.loadImage("src/main/resources/explosion/vertical.png");
 
-        // Extra Bits
+        // Extra Icons
         GameController.clock = app.loadImage("src/main/resources/icons/clock.png");
         GameController.playerFace = app.loadImage("src/main/resources/icons/player.png");
 

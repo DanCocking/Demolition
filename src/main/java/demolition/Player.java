@@ -11,21 +11,31 @@ public class Player extends Moveable implements Displayed{
     public PImage currSprite;
     static PImage[][] sprites = new PImage[4][4];
 
+    /**
+     * Class constructor
+     *
+     * Initialises player at (x,y) coordinates with given number of lives
+     *
+     * @param x         the x-coordinate of the player
+     * @param y         the y-coordinate of the player
+     * @param lives     the number of lives that player starts with
+     */
     public Player(int x, int y, int lives) {
         super(x,y);
         this.lives = lives;
     }
 
-    public void setSprite(PImage sprite) {
-        this.currSprite = sprite;
-    }
-
-    public void draw(PApplet app) {
-        // The image() method is used to draw PImages onto the screen.
-        // The first argument is the image, the second and third arguments are coordinates
+    /**
+     * Draws player sprite to application window
+     * @param app       the application window the player sprite is drawn to
+     */
+    public void draw(App app) {
         app.image(this.currSprite, this.x, this.y);
     }
 
+    /**
+     * Run on tick to update the player sprite to have correct direction and sprite
+     */
     public void tick() {
         timer++;
 
@@ -44,19 +54,23 @@ public class Player extends Moveable implements Displayed{
         }
     }
 
-
+    /**
+     * The method subtracts a life and resets the map
+     * Returns whether the method was succesful
+     * @param gameController        the game controller with access to level maps to reset
+     * @return                      the success of the method
+     */
     public boolean loseLife(GameController gameController) {
-        // TODO Auto-generated method stub
         lives--;
         gameController.reMap();
         return true;
     }
 
-    public boolean explode() {
-         return false;
-    }
-
-
+    /**
+     * Will create a new bomb and place it onto the game map
+     *
+     * @param map       The map the bomb is to be placed onto
+     */
     public void dropBomb(Map map) {
         for (Bomb bomb : map.bombs) {
             if (bomb.x == x && bomb.y == y + 16) {

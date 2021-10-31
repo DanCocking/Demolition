@@ -2,6 +2,7 @@ package demolition;
 
 import java.util.Random;
 
+
 public enum Direction {
     left {
       @Override
@@ -15,6 +16,7 @@ public enum Direction {
       @Override
       public Direction turn() { return right;}
     },
+
     down{
       @Override
       public Direction turn() { return left;}
@@ -24,10 +26,18 @@ public enum Direction {
     private static final int SIZE = VALUES.length;
     private static final Random RANDOM = new Random();
 
+    /**
+     * Returns a random Direction
+     * @return a random direction
+     */
     public static Direction getRandomDirection()  {
       return VALUES[RANDOM.nextInt(SIZE)];
     }
 
+    /**
+     * Returns the direction clockwise from the direction that the method is called on
+     * @return the direction clockwise from the current direction
+     */
     public Direction turn() {
         return null;
     }

@@ -5,10 +5,22 @@ import processing.core.PImage;
 public class RedEnemy extends Enemy {
     static PImage[][] sprites = new PImage[4][4];
 
-    RedEnemy(int x, int y) {
-        super(x, y);
+    /**
+     * Class constructor.
+     *
+     * Initialises red Enemy on map at (x,y) coordinates and first sprite set
+     * @param x         the x-coordinate of the RedEnemy
+     * @param y         the y-coordinate of the RedEnemy
+     * @param map       the map the enemy is placed onto
+     */
+    RedEnemy(int x, int y, Map map) {
+        super(x, y, map);
         this.currSprite = sprites[3][0];
     }
+
+    /**
+     * Runs at gametick to change enemy sprites, move enemy and change the enemy's direction in a random direction that is passable whenever it hits a wall
+      */
     @Override
     public void tick() {
         moveTimer++;
@@ -48,7 +60,5 @@ public class RedEnemy extends Enemy {
             currSprite = sprites[3][spriteNum];
         }
     }
-    public boolean explode() {
-        return loseLife();
-    }
+
 }
