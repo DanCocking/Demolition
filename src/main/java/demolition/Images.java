@@ -1,8 +1,11 @@
 package demolition;
 
 import processing.core.PApplet;
-import processing.core.PImage;
+
 import demolition.Tiles.*;
+import demolition.moveables.Player;
+import demolition.moveables.RedEnemy;
+import demolition.moveables.YellowEnemy;
 
 public class Images  {
 

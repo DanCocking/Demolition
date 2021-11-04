@@ -1,14 +1,10 @@
 package demolition.Tiles;
-import processing.core.PImage;
 import demolition.App;
-import demolition.Displayed;
-import processing.core.PApplet;
+import demolition.Displayable;
 
 
-public abstract class Tile implements Displayed {
-    int x;
-    int y;
 
+public abstract class Tile extends Displayable {
     /**
      * Returns whether the block stops explosions from effecting the next block
      *
@@ -36,8 +32,7 @@ public abstract class Tile implements Displayed {
      * @param y         the y-coordinate of the tile
      */
     public Tile(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
     }
 
     /**
@@ -53,21 +48,4 @@ public abstract class Tile implements Displayed {
     public void tick() {
 
     }
-
-    /**
-     * Returns the x-coordinate of the tile
-     * @return the x-coordinate of the tile
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Returns the y-coordinate of the tile
-     * @return the y-coordinate of the tile
-     */
-    public int getY() {
-        return y;
-    }
-
 }

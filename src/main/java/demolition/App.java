@@ -1,5 +1,6 @@
 package demolition;
 
+import demolition.moveables.Player;
 import processing.core.PApplet;
 import processing.core.PFont;
 
@@ -61,10 +62,6 @@ public class App extends PApplet {
      * Moves player LEFT on left key, RIGHT on right key, UP on up key, DOWN on down key and drops bomb on SPACE key.
      */
     public void keyPressed() {
-        // Left: 37
-        // Up: 38
-        // Right: 39
-        // Down: 40
 
         if (this.keyCode == 37 && !pressedKeys[0]) {
             this.player.moveLeft(gameController.map);
@@ -89,10 +86,6 @@ public class App extends PApplet {
      * Will prevent user from moving in any direction (or dropping bombs) without first releasing that key. They may give any other input whilst one is held down however.
      */
     public void keyReleased() {
-        // Left: 37
-        // Up: 38
-        // Right: 39
-        // Down: 40
         if (this.keyCode == 37) {
             pressedKeys[0] = false;
         } else if (this.keyCode == 38) {

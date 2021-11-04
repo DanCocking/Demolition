@@ -1,17 +1,19 @@
 package demolition;
 
 import java.util.*;
-
-import demolition.Tiles.*;
-
-
 import java.io.*;
 
-import processing.core.PApplet;
-public class Map implements Displayed {
+import demolition.Tiles.*;
+import demolition.moveables.Enemy;
+import demolition.moveables.Player;
+import demolition.moveables.RedEnemy;
+import demolition.moveables.YellowEnemy;
+
+
+public class Map {
     Tile[][] levelMap;
     ArrayList<Enemy> enemys = new ArrayList<>();
-    ArrayList<Bomb> bombs = new ArrayList<>();
+    public ArrayList<Bomb> bombs = new ArrayList<>();
     ArrayList<Explosion> explosions = new ArrayList<>();
 
     public int timer = 0;
@@ -65,8 +67,8 @@ public class Map implements Displayed {
                 } else  {
                     tile = new EmptyTile(x, y);
                     if (character == 'P') {
-                        gameController.player.x = x;
-                        gameController.player.y = y - 16;
+                        gameController.player.setX(x);
+                        gameController.player.setY(y - 16);
                     } else if (character == 'R') {
                         RedEnemy red = new RedEnemy(x, y-16, this);
                         enemys.add(red);
@@ -125,7 +127,7 @@ public class Map implements Displayed {
 
         for (Enemy enemy : enemys) {
             enemy.tick();
-            if (enemy.x == player.x && enemy.y == player.y) {
+            if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
                 player.loseLife(app.gameController);
             }
         }
@@ -139,12 +141,12 @@ public class Map implements Displayed {
             explosion.tick();
 
             if (explosion.burning) {
-                if (explosion.x == player.x && explosion.y == player.y + 16) {
+                if (explosion.getX() == player.getX() && explosion.getY() == player.getY() + 16) {
                     player.loseLife(app.gameController);
                     break;
                 }
                 for (Enemy enemy : enemys) {
-                    if (explosion.x == enemy.x && explosion.y == enemy.y + 16) {
+                    if (explosion.getX() == enemy.getX() && explosion.getY() == enemy.getY() + 16) {
                         enemy.loseLife();
                     }
                 }
@@ -155,7 +157,7 @@ public class Map implements Displayed {
         }
         for (Tile[] tiles : levelMap) {
             for (Tile tile : tiles) {
-                if (tile.getX() == player.x && tile.getY() == player.y + 16 && tile.getClass() == demolition.Tiles.GoalTile.class) {
+                if (tile.getX() == player.getX() && tile.getY() == player.getY() + 16 && tile.getClass() == demolition.Tiles.GoalTile.class) {
                     gameController.levelComplete();
                 }
             }
