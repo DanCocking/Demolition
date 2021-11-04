@@ -3,13 +3,26 @@ package demolition;
 import demolition.Tiles.*;
 import processing.core.PImage;
 
+/**
+ * Bomb class, implements the bomb feature, it can be displayed to window, and will explode neccesary
+ * blocks and enemies on its map depending on their properties
+ */
 public class Bomb extends Displayable{
     private static final double TIME_BETWEEN_FRAMES = 0.25;
-    Map map;
-    public int timer = 0;
+    private Map map;
+    private int timer = 0;
+    private int spriteNum = 0;
+
+
+    /**
+     * The images displayed to window of the bombs animation in order
+     */
     static PImage[] sprites = new PImage[8];
-    int spriteNum = 0;
-    boolean exploded = false;
+
+    /**
+     * Tracks whether the bomb has exploded or not
+     */
+    public boolean exploded = false;
 
     /**
      * Class constructor.
@@ -66,49 +79,61 @@ public class Bomb extends Displayable{
         exploded = true;
         map.explosions.add(new Explosion(x, y, 0));
         //down
-        if (!(map.tileAt(x, y + 32).stopsExplosions()) && map.tileAt(x, y + 64).isBreakable()) {
-            map.setTile(new EmptyTile(x, y + 64));
+        if (!(map.tileAt(x, y + 32).stopsExplosions()) && map.tileAt(x, y + 64).isBreakable() ) {
+            if (map.tileAt(x, y+64).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x, y + 64));
+            }
             map.explosions.add(new Explosion(x, y+64, 2));
         }
         if (map.tileAt(x, y + 32).isBreakable()) {
-            Tile newTile = new EmptyTile(x, y + 32);
-            map.setTile(newTile);
+            if (map.tileAt(x, y+32).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x, y + 32));
+            }
             map.explosions.add(new Explosion(x, y+32, 2));
         }
 
 
         // up
         if (!(map.tileAt(x, y - 32).stopsExplosions()) && map.tileAt(x, y - 64).isBreakable()) {
-            map.setTile(new EmptyTile(x, y - 64));
+            if (map.tileAt(x, y-64).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x, y - 64));
+            }
             map.explosions.add(new Explosion(x, y-64, 2));
         }
         if (map.tileAt(x, y - 32).isBreakable()) {
-            Tile newTile = new EmptyTile(x, y - 32);
-            map.setTile(newTile);
+            if (map.tileAt(x, y-32).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x, y - 32));
+            }
             map.explosions.add(new Explosion(x, y-32, 2));
         }
 
 
         // right
         if (!(map.tileAt(x + 32, y).stopsExplosions()) && map.tileAt(x + 64, y).isBreakable()) {
-            map.setTile(new EmptyTile(x + 64, y));
+            if (map.tileAt(x + 64, y).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x + 64, y));
+            }
             map.explosions.add(new Explosion(x + 64, y, 1));
         }
 
         if (map.tileAt(x + 32, y).isBreakable()) {
-            Tile newTile = new EmptyTile(x + 32, y);
-            map.setTile(newTile);
+            if (map.tileAt(x + 32, y).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x + 32, y));
+            }
             map.explosions.add(new Explosion(x + 32, y, 1));
         }
 
         // left
         if (!(map.tileAt(x - 32, y).stopsExplosions()) && map.tileAt(x - 64, y).isBreakable()) {
-            map.setTile(new EmptyTile(x - 64, y));
+            if (map.tileAt(x - 64, y).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x - 64, y));
+            }
             map.explosions.add(new Explosion(x - 64, y, 1));
         }
         if (map.tileAt(x - 32, y).isBreakable()) {
-            Tile newTile = new EmptyTile(x - 32, y);
-            map.setTile(newTile);
+            if (map.tileAt(x -32, y).getClass() != GoalTile.class) {
+                map.setTile(new EmptyTile(x - 32, y));
+            }
             map.explosions.add(new Explosion(x - 32, y, 1));
         }
 

@@ -22,8 +22,8 @@ public class BasicTileTests {
     public void isBreakableTest() {
         assertTrue(breakableTile.isBreakable());
         assertTrue(emptyTile.isBreakable());
+        assertTrue(goalTile.isBreakable());
 
-        assertFalse(goalTile.isBreakable());
         assertFalse(solidTile.isBreakable());
     }
 

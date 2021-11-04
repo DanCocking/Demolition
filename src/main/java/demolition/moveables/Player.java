@@ -7,14 +7,28 @@ import demolition.GameController;
 import demolition.Map;
 
 import processing.core.PImage;
-
+/**
+ * Player class, used to implement the controlable player.
+ * Controls positioning, drawing and all other aspects of
+ * the playerr state
+ */
 public class Player extends Moveable {
-    public int lives = 3;
-    public int spriteNum = 0;
-    public int timer = 0;
-    public final double TIME_BETWEEN_FRAMES = 0.2;
-    public PImage currSprite;
+
+    /**
+     * Tracks the number of lives the player has
+     */
+    public int lives;
+
+    /**
+     * A list of all the sprites for Player organised as each direction having a list of its
+     * individual frames/animation sprites
+     */
     public static PImage[][] sprites = new PImage[4][4];
+
+    private int spriteNum = 0;
+    private int timer = 0;
+    private final double TIME_BETWEEN_FRAMES = 0.2;
+    private PImage currSprite;
 
     /**
      * Class constructor
@@ -48,13 +62,13 @@ public class Player extends Moveable {
             spriteNum = ((spriteNum + 1) % 4);
             timer = 0;
         }
-        if (direction == Direction.left) {
+        if (direction == Direction.LEFT) {
             currSprite = sprites[0][spriteNum];
-        } else if (direction == Direction.up) {
+        } else if (direction == Direction.UP) {
             currSprite = sprites[1][spriteNum];
-        } else if (direction == Direction.right) {
+        } else if (direction == Direction.RIGHT) {
             currSprite = sprites[2][spriteNum];
-        } else if (direction == Direction.down) {
+        } else if (direction == Direction.DOWN) {
             currSprite = sprites[3][spriteNum];
         }
     }

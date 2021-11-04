@@ -3,8 +3,14 @@ package demolition.Tiles;
 import demolition.App;
 import processing.core.PImage;
 
-
+/**
+ * GoalTile class, Used to implent goal tiles that are able to be displayed to window in correct position
+ * and able to be not passed by moveables nor passed by or exploded by explosions
+ */
 public class SolidTile extends Tile {
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**

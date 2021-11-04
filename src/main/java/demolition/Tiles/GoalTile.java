@@ -3,8 +3,14 @@ import demolition.App;
 import processing.core.PImage;
 
 
-
+/**
+ * GoalTile class, Used to implent goal tiles that are able to be displayed to window in correct position
+ * and able to be passed by moveables
+ */
 public class GoalTile extends Tile {
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**
@@ -22,7 +28,7 @@ public class GoalTile extends Tile {
      * @return false
      */
     public boolean isBreakable() {
-        return false;
+        return true;
     }
 
      /**

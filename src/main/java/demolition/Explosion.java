@@ -2,14 +2,25 @@ package demolition;
 
 import processing.core.PImage;
 
-
+/**
+ * Explosion class, implements horizontal, vertical and center explosions and their basic logic
+ */
 public class Explosion extends Displayable{
     private static final double TIME_ON_SCREEN = 0.5;
+     // 0: Center, 1: Horizontal, 2: Vertical
+     private int type;
+     private int timer = 0;
+
+    /**
+     * The images displayed to window of the explosions animation in order of type
+     */
     static PImage[] sprites = new PImage[3];
+
+    /**
+     * tracks whether the explosion is still active or not
+     */
     public boolean burning = true;
-    // 0: Center, 1: Horizontal, 2: Vertical
-    int type;
-    int timer = 0;
+
 
     /**
      * Class constructor

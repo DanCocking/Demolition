@@ -9,19 +9,37 @@ import demolition.moveables.Player;
 import demolition.moveables.RedEnemy;
 import demolition.moveables.YellowEnemy;
 
-
+/**
+ * Map Class, Controls the current level of the game, tracks all entitys aand the state of the map/tile layout.
+ */
 public class Map {
-    Tile[][] levelMap;
-    ArrayList<Enemy> enemys = new ArrayList<>();
+    private App app;
+    private Player player;
+    private GameController gameController;
+    private int timer = 0;
+    private static final int PURGE_TIME = 1200;
+
+    /**
+     * The map of the level displayed as a 2D list of Tiles
+     */
+    public Tile[][] levelMap;
+
+    /**
+     * List of all Enemys currently on the map
+     */
+    public ArrayList<Enemy> enemys = new ArrayList<>();
+
+    /**
+     * List of all bombs currently on the map
+     */
     public ArrayList<Bomb> bombs = new ArrayList<>();
-    ArrayList<Explosion> explosions = new ArrayList<>();
 
-    public int timer = 0;
-    public static final int PURGE_TIME = 120;
+    /**
+     * List of all explosioins currently on map
+     */
+    public ArrayList<Explosion> explosions = new ArrayList<>();
 
-    App app;
-    Player player;
-    GameController gameController;
+
 
     /**
      * Class constructor
@@ -56,7 +74,6 @@ public class Map {
                 Tile tile;
 
                 if (character == 'W') {
-
                     tile = new SolidTile(x, y);
                 } else if (character == 'B') {
                     tile = new BreakableTile(x, y);
@@ -127,7 +144,7 @@ public class Map {
 
         for (Enemy enemy : enemys) {
             enemy.tick();
-            if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
+            if (enemy.alive && enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
                 player.loseLife(app.gameController);
             }
         }

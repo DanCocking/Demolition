@@ -2,8 +2,14 @@ package demolition.Tiles;
 import demolition.App;
 import processing.core.PImage;
 
-
+/**
+ * Empty class, Used to implent empty tiles that are able to be displayed to window in correct position
+ * and able to be passed by moveables
+ */
 public class EmptyTile extends Tile{
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**

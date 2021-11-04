@@ -1,7 +1,17 @@
 package demolition;
 
-import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import demolition.Tiles.*;
+import demolition.moveables.Enemy;
+import demolition.moveables.RedEnemy;
+import demolition.moveables.YellowEnemy;
 import processing.core.PApplet;
 
 public class LoadFileTest {
@@ -26,16 +36,88 @@ public class LoadFileTest {
         app.delay(1000);
 
         // Check position of Tiles
-        
-        // Call draw to update the program.
-        app.draw();
+        File file = new File("src/test/resources/level1.txt");
+        Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            assertTrue(false);
+            return;
+        }
 
-        // Call keyPressed() or similar
+        int row = 0;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            int column = 0;
+            for (char character : line.toCharArray()) {
 
-        // Call draw again to move onto the next frame
-        app.draw();
+                if (character == 'W') {
+                    assertTrue(app.gameController.map.levelMap[row][column].getClass() == SolidTile.class);
+                    assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                    assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                } else if (character == 'B') {
+                    assertTrue(app.gameController.map.levelMap[row][column].getClass() == BreakableTile.class);
+                    assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                    assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                } else if (character == 'G') {
+                    assertTrue(app.gameController.map.levelMap[row][column].getClass() == GoalTile.class);
+                    assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                    assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                } else if (character == ' ') {
+                    assertTrue(app.gameController.map.levelMap[row][column].getClass() == EmptyTile.class);
+                    assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                    assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                }
+                else  {
+
+                    if (character == 'P') {
+                        assertTrue(app.gameController.map.levelMap[row][column].getClass() == EmptyTile.class);
+                        assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                        assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                        assertEquals(column *32,app.gameController.player.getX());
+                        assertEquals(row *32 + 48,app.gameController.player.getY());
+
+                    } else if (character == 'R') {
+                        assertTrue(app.gameController.map.levelMap[row][column].getClass() == EmptyTile.class);
+                        assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                        assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                        boolean check = false;
+                        for (Enemy enemy : app.gameController.map.enemys) {
+                            if (enemy.getClass() == RedEnemy.class && enemy.getX() == column *32 && enemy.getY() == row *32 + 48) {
+                                check = true;
+                                break;
+                            }
+                        }
+                        assertTrue(check);
+                    } else if (character == 'Y') {
+                        assertTrue(app.gameController.map.levelMap[row][column].getClass() == EmptyTile.class);
+                        assertEquals(column * 32, app.gameController.map.levelMap[row][column].getX());
+                        assertEquals(row * 32 + 64, app.gameController.map.levelMap[row][column].getY());
+                        boolean check = false;
+                        for (Enemy enemy : app.gameController.map.enemys) {
+                            if (enemy.getClass() == YellowEnemy.class && enemy.getX() == column *32 && enemy.getY() == row *32 + 48) {
+                                check = true;
+                                break;
+                            }
+                        }
+                        assertTrue(check);
+                    }
+                }
+                column++;
+            }
+            assertEquals(15, column);
+            column = 0;
+            row++;
+        }
+
+        assertEquals(13, row);
+        scanner.close();
+
+
 
         // Verify the new state of the program with assertions
+
+
 
     }
 }

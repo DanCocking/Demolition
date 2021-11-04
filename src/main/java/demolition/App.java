@@ -5,20 +5,24 @@ import processing.core.PApplet;
 import processing.core.PFont;
 
 
-
+/**
+ * App class, initiates the running and setup of the entire application as well as managing user input
+ */
 public class App extends PApplet {
 
-    public static final int WIDTH = 480;
-    public static final int HEIGHT = 480;
+    private static final int WIDTH = 480;
+    private static final int HEIGHT = 480;
+    private static final int FPS = 60;
 
-    public static final int FPS = 60;
-
-    public Player player;
-
-    public GameController gameController;
+    private Player player;
     private boolean[] pressedKeys = new boolean[5];
-
     private String config = "config.json";
+
+    /**
+     * The Logic handler of the game, contains the level(Map) as well as all other parts of game logic and drawing
+     */
+    public GameController gameController;
+
 
 
     /**

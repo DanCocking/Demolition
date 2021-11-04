@@ -7,6 +7,9 @@ import demolition.moveables.Player;
 import demolition.moveables.RedEnemy;
 import demolition.moveables.YellowEnemy;
 
+/**
+ * Images class, loads all images/sprites needed for the game
+ */
 public class Images  {
 
     /**

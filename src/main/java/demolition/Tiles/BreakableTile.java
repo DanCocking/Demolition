@@ -3,8 +3,14 @@ import demolition.App;
 import processing.core.PImage;
 
 
-
+/**
+ * BreakableTile class, Used to implent breakable tiles that are able to be displayed to window in correct position
+ * and able to be exploded by bomb
+ */
 public class BreakableTile extends Tile {
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**

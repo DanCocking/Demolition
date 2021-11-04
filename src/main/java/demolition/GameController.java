@@ -8,20 +8,37 @@ import demolition.moveables.Player;
 import processing.core.PImage;
 import processing.data.JSONObject;
 
-/** */
+/**
+ * GameController class, controls the logic of the game as a whole, including time, player and the level generation and management
+ */
 public class GameController {
-    Map map;
-    App app;
-    JSONObject config;
-    int time;
-    int level = 0;
-    int timer = 0;
-    static PImage clock;
-    static PImage playerFace;
-    boolean playing = true;
-    boolean win = false;
+    private App app;
+    private JSONObject config;
+    private int time;
+    private int level = 0;
+    private int timer = 0;
+    private boolean playing = true;
+    private boolean win = false;
 
-    Player player;
+    /**
+     * holds the game state of the current level
+     */
+    Map map;
+
+    /**
+     * Stores image for the clock icon
+     */
+    static PImage clock;
+
+    /**
+     * Stores image for the playerFace icon
+     */
+    static PImage playerFace;
+
+    /**
+     * The player that is playing the game
+     */
+    public Player player;
 
     /**
      * Class constructor.

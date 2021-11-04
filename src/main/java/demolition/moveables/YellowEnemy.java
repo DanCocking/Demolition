@@ -4,7 +4,14 @@ import demolition.Direction;
 import demolition.Map;
 import processing.core.PImage;
 
+/**
+ * YellowEnemy class, used to implement redenemies as well as their clockwise movement AI
+ */
 public class YellowEnemy extends Enemy {
+    /**
+     * A list of all the sprites for YellowEnemy organised as each direction having a list of its
+     * individual frames/animation sprites
+     */
     public static PImage[][] sprites = new PImage[4][4];
 
         /**
@@ -30,13 +37,13 @@ public class YellowEnemy extends Enemy {
             boolean moved = false;
 
             while (!moved) {
-                if (direction == Direction.left) {
+                if (direction == Direction.LEFT) {
                     moved = moveLeft(map);
-                } else if (direction == Direction.up) {
+                } else if (direction == Direction.UP) {
                     moved = moveUp(map);
-                } else if (direction == Direction.right) {
+                } else if (direction == Direction.RIGHT) {
                     moved = moveRight(map);
-                } else if (direction == Direction.down) {
+                } else if (direction == Direction.DOWN) {
                     moved = moveDown(map);
                 }
                 if (!moved) {
@@ -52,13 +59,13 @@ public class YellowEnemy extends Enemy {
             spriteNum = ((spriteNum + 1) % 4);
             timer = 0;
         }
-        if (direction == Direction.left) {
+        if (direction == Direction.LEFT) {
             currSprite = sprites[0][spriteNum];
-        } else if (direction == Direction.up) {
+        } else if (direction == Direction.UP) {
             currSprite = sprites[1][spriteNum];
-        } else if (direction == Direction.right) {
+        } else if (direction == Direction.RIGHT) {
             currSprite = sprites[2][spriteNum];
-        } else if (direction == Direction.down) {
+        } else if (direction == Direction.DOWN) {
             currSprite = sprites[3][spriteNum];
         }
     }

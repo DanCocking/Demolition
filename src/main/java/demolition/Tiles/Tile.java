@@ -3,7 +3,10 @@ import demolition.App;
 import demolition.Displayable;
 
 
-
+/**
+ * Tile Class, used for implementing all tiles in Tiles module. Enforces all neccesary methods
+ * and constructor
+ */
 public abstract class Tile extends Displayable {
     /**
      * Returns whether the block stops explosions from effecting the next block

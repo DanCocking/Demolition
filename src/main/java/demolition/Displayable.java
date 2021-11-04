@@ -1,8 +1,18 @@
 package demolition;
 
-
+/**
+ * Displayable Class, Provides basic methods to all objects that are displayed to the window
+ */
 public abstract class Displayable {
+
+    /**
+     * The x coordinate of the Displayable
+     */
     protected int x;
+
+    /**
+     * The y coordinate of the Displayable
+     */
     protected int y;
 
     /**

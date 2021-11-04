@@ -78,11 +78,11 @@ public class Player extends Moveable {
      */
     public void dropBomb(Map map) {
         // comment out following loop to allow multiple bombs on one tile simultaneously
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        for (Bomb bomb : map.bombs) {</span>
-<span class="nc bnc" id="L82" title="All 4 branches missed.">            if (bomb.getX() == x &amp;&amp; bomb.getY() == y + 16) {</span>
-<span class="nc" id="L83">                return;</span>
-            }
-<span class="nc" id="L85">        }</span>
+        // for (Bomb bomb : map.bombs) {
+        //     if (bomb.getX() == x &amp;&amp; bomb.getY() == y + 16) {
+        //         return;
+        //     }
+        // }
 
 <span class="nc" id="L87">        new Bomb(x, y, map);</span>
 <span class="nc" id="L88">    }</span>

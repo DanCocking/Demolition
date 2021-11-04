@@ -4,9 +4,15 @@ import demolition.Direction;
 import demolition.Displayable;
 import demolition.Map;
 
-//TODO still need to put in things for if there is a blcok in said area; also need to stop on screen edge
+/**
+ * Movable Class, Used to implement the basic movement funcitons, used in the implementation of
+ * Enemy (and its subclasses) and Player
+ */
 public abstract class Moveable extends Displayable{
-    Direction direction = Direction.down;
+    /**
+     * Tracks the Direction (from enum) that the movable is facing
+     */
+    Direction direction = Direction.DOWN;
 
     /**
      * Class constructor.
@@ -25,7 +31,7 @@ public abstract class Moveable extends Displayable{
      * @return      the boolean value of if the move was a success
      */
     public boolean moveLeft(Map map) {
-        direction = Direction.left;
+        direction = Direction.LEFT;
         if (map.tileAt(x-32, y+16).isPassable()) {
             x -= 32;
             return true;
@@ -40,7 +46,7 @@ public abstract class Moveable extends Displayable{
      * @return      the boolean value of if the move was a success
      */
     public boolean moveRight(Map map) {
-        direction = Direction.right;
+        direction = Direction.RIGHT;
         if (map.tileAt(x+32, y+16).isPassable()) {
             x += 32;
             return true;
@@ -55,7 +61,7 @@ public abstract class Moveable extends Displayable{
      * @return      the boolean value of if the move was a success
      */
     public boolean moveUp(Map map) {
-        direction = Direction.up;
+        direction = Direction.UP;
 
         if (map.tileAt(x, y - 16).isPassable()) {
             y -= 32;
@@ -71,7 +77,7 @@ public abstract class Moveable extends Displayable{
      * @return      the boolean value of if the move was a success
      */
     public boolean moveDown(Map map) {
-        direction = Direction.down;
+        direction = Direction.DOWN;
 
         if (map.tileAt(x, y + 48).isPassable()) {
             y += 32;

@@ -4,19 +4,49 @@ import demolition.App;
 import demolition.Map;
 import processing.core.PImage;
 
-
+/**
+ * Enemy class, can represent different emeny classes including RedEnemy and YellowEnemy
+ */
 public abstract class Enemy extends Moveable{
-
+    /**
+     * Marks if enemy is alive or not
+     */
     public boolean alive = true;
-    public int spriteNum = 0;
-    public int timer = 0;
-    public int moveTimer = 0;
 
-    public final double TIME_BETWEEN_FRAMES = 0.2;
-    public final double TIME_BETWEEN_MOVES = 1;
+    /**
+     * Tracks which phase of the movement animation Enemy is currently at
+     */
+    protected int spriteNum = 0;
 
-    public PImage currSprite;
-    public Map map;
+    /**
+     * Number of ticks since last animation change
+     */
+    protected int timer = 0;
+
+    /**
+     * Number of ticks since last movement of the enemy
+     */
+    protected int moveTimer = 0;
+
+    /**
+     * The amount of time in seconds between animation frames
+     */
+    protected final double TIME_BETWEEN_FRAMES = 0.2;
+
+    /**
+     * The amount of time in seconds between movements of the enemy
+     */
+    protected final double TIME_BETWEEN_MOVES = 1;
+
+    /**
+     * The current sprite to be rendered on calling the draw method
+     */
+    protected PImage currSprite;
+
+    /**
+     * The map the enemy is moving on
+     */
+    protected Map map;
 
     /**
      * Class constructor.
