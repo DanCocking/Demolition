@@ -2,14 +2,25 @@
 
 import processing.core.PImage;
 
-
+/**
+ * Explosion class, implements horizontal, vertical and center explosions and their basic logic
+ */
 public class Explosion extends Displayable{
     private static final double TIME_ON_SCREEN = 0.5;
-<span class="fc" id="L8">    static PImage[] sprites = new PImage[3];</span>
-<span class="nc" id="L9">    public boolean burning = true;</span>
-    // 0: Center, 1: Horizontal, 2: Vertical
-    int type;
-<span class="nc" id="L12">    int timer = 0;</span>
+     // 0: Center, 1: Horizontal, 2: Vertical
+     private int type;
+<span class="fc" id="L12">     private int timer = 0;</span>
+
+    /**
+     * The images displayed to window of the explosions animation in order of type
+     */
+<span class="fc" id="L17">    static PImage[] sprites = new PImage[3];</span>
+
+    /**
+     * tracks whether the explosion is still active or not
+     */
+<span class="fc" id="L22">    public boolean burning = true;</span>
+
 
     /**
      * Class constructor
@@ -20,40 +31,40 @@ public class Explosion extends Displayable{
      * @param type      the type of the explosion (0: Center, 1: Horizontal, 2: Vertical)
      */
     public Explosion(int x, int y, int type) {
-<span class="nc" id="L23">        super(x, y);</span>
-<span class="nc" id="L24">        this.type = type;</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L34">        super(x, y);</span>
+<span class="fc" id="L35">        this.type = type;</span>
+<span class="fc" id="L36">    }</span>
 
     /**
      * Draws the explosion to the given application window
      * @param app       the explosion window to draw to
      */
     public void draw(App app) {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (burning) {</span>
-<span class="nc" id="L33">            app.image(Explosion.sprites[type], this.x, this.y);</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (burning) {</span>
+<span class="fc" id="L44">            app.image(Explosion.sprites[type], this.x, this.y);</span>
         }
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L46">    }</span>
 
     /**
      * Runs a tick on explosion
      * Will measure time of explosion to make burning variable false when explosion has lasted full time
      */
     public void tick() {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (!burning) return;</span>
-<span class="nc" id="L43">        timer++;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (!burning) return;</span>
+<span class="fc" id="L54">        timer++;</span>
 
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (timer &gt; TIME_ON_SCREEN * 60) {</span>
-<span class="nc" id="L46">            burning = false;</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (timer &gt; TIME_ON_SCREEN * 60) {</span>
+<span class="fc" id="L57">            burning = false;</span>
         }
 
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L60">    }</span>
 
     /**
      * Returns the x-coordinate of explosion
      * @return the x-coordinate of the explosion
      */
     public int getX() {
-<span class="nc" id="L56">        return x;</span>
+<span class="fc" id="L67">        return x;</span>
     }
 
     /**
@@ -61,7 +72,7 @@ public class Explosion extends Displayable{
      * @return the y-coordinate of the explosion
      */
     public int getY() {
-<span class="nc" id="L64">        return y;</span>
+<span class="nc" id="L75">        return y;</span>
     }
 
 }

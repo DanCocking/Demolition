@@ -134,12 +134,6 @@ public class Map {
      *
      */
     public void tick() {
-        for (Tile[] tiles : levelMap) {
-            for (Tile tile : tiles) {
-                tile.tick();
-            }
-        }
-
         player.tick();
 
         for (Enemy enemy : enemys) {
@@ -174,7 +168,7 @@ public class Map {
         }
         for (Tile[] tiles : levelMap) {
             for (Tile tile : tiles) {
-                if (tile.getX() == player.getX() && tile.getY() == player.getY() + 16 && tile.getClass() == demolition.Tiles.GoalTile.class) {
+                if (tile.getX() == player.getX() && tile.getY() == player.getY() + 16 && tile.getClass() == GoalTile.class) {
                     gameController.levelComplete();
                 }
             }

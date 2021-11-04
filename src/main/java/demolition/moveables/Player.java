@@ -25,7 +25,12 @@ public class Player extends Moveable {
      */
     public static PImage[][] sprites = new PImage[4][4];
 
-    private int spriteNum = 0;
+    /**
+     * The current phase/frame of the animation the player is currently on (not direction)
+     */
+    public int spriteNum = 0;
+
+
     private int timer = 0;
     private final double TIME_BETWEEN_FRAMES = 0.2;
     private PImage currSprite;

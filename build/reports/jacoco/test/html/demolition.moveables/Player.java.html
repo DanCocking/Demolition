@@ -7,14 +7,33 @@ import demolition.GameController;
 import demolition.Map;
 
 import processing.core.PImage;
-
+/**
+ * Player class, used to implement the controlable player.
+ * Controls positioning, drawing and all other aspects of
+ * the playerr state
+ */
 public class Player extends Moveable {
-<span class="fc" id="L12">    public int lives = 3;</span>
-<span class="fc" id="L13">    public int spriteNum = 0;</span>
-<span class="fc" id="L14">    public int timer = 0;</span>
-<span class="fc" id="L15">    public final double TIME_BETWEEN_FRAMES = 0.2;</span>
-    public PImage currSprite;
-<span class="fc" id="L17">    public static PImage[][] sprites = new PImage[4][4];</span>
+
+    /**
+     * Tracks the number of lives the player has
+     */
+    public int lives;
+
+    /**
+     * A list of all the sprites for Player organised as each direction having a list of its
+     * individual frames/animation sprites
+     */
+<span class="fc" id="L26">    public static PImage[][] sprites = new PImage[4][4];</span>
+
+    /**
+     * The current phase/frame of the animation the player is currently on (not direction)
+     */
+<span class="fc" id="L31">    public int spriteNum = 0;</span>
+
+
+<span class="fc" id="L34">    private int timer = 0;</span>
+<span class="fc" id="L35">    private final double TIME_BETWEEN_FRAMES = 0.2;</span>
+    private PImage currSprite;
 
     /**
      * Class constructor
@@ -26,38 +45,38 @@ public class Player extends Moveable {
      * @param lives     the number of lives that player starts with
      */
     public Player(int x, int y, int lives) {
-<span class="fc" id="L29">        super(x,y);</span>
-<span class="fc" id="L30">        this.lives = lives;</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L48">        super(x,y);</span>
+<span class="fc" id="L49">        this.lives = lives;</span>
+<span class="fc" id="L50">    }</span>
 
     /**
      * Draws player sprite to application window
      * @param app       the application window the player sprite is drawn to
      */
     public void draw(App app) {
-<span class="fc" id="L38">        app.image(this.currSprite, this.x, this.y);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L57">        app.image(this.currSprite, this.x, this.y);</span>
+<span class="fc" id="L58">    }</span>
 
     /**
      * Run on tick to update the player sprite to have correct direction and sprite
      */
     public void tick() {
-<span class="fc" id="L45">        timer++;</span>
+<span class="fc" id="L64">        timer++;</span>
 
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (timer &gt; TIME_BETWEEN_FRAMES * 60) {</span>
-<span class="nc" id="L48">            spriteNum = ((spriteNum + 1) % 4);</span>
-<span class="nc" id="L49">            timer = 0;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (timer &gt; TIME_BETWEEN_FRAMES * 60) {</span>
+<span class="fc" id="L67">            spriteNum = ((spriteNum + 1) % 4);</span>
+<span class="fc" id="L68">            timer = 0;</span>
         }
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (direction == Direction.left) {</span>
-<span class="nc" id="L52">            currSprite = sprites[0][spriteNum];</span>
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        } else if (direction == Direction.up) {</span>
-<span class="nc" id="L54">            currSprite = sprites[1][spriteNum];</span>
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        } else if (direction == Direction.right) {</span>
-<span class="nc" id="L56">            currSprite = sprites[2][spriteNum];</span>
-<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        } else if (direction == Direction.down) {</span>
-<span class="fc" id="L58">            currSprite = sprites[3][spriteNum];</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (direction == Direction.LEFT) {</span>
+<span class="fc" id="L71">            currSprite = sprites[0][spriteNum];</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        } else if (direction == Direction.UP) {</span>
+<span class="nc" id="L73">            currSprite = sprites[1][spriteNum];</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        } else if (direction == Direction.RIGHT) {</span>
+<span class="fc" id="L75">            currSprite = sprites[2][spriteNum];</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        } else if (direction == Direction.DOWN) {</span>
+<span class="fc" id="L77">            currSprite = sprites[3][spriteNum];</span>
         }
-<span class="fc" id="L60">    }</span>
+<span class="fc" id="L79">    }</span>
 
     /**
      * The method subtracts a life and resets the map
@@ -66,9 +85,9 @@ public class Player extends Moveable {
      * @return                      the success of the method
      */
     public void loseLife(GameController gameController) {
-<span class="nc" id="L69">        lives--;</span>
-<span class="nc" id="L70">        gameController.reMap();</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L88">        lives--;</span>
+<span class="nc" id="L89">        gameController.reMap();</span>
+<span class="nc" id="L90">    }</span>
 
     /**
      * Will create a new bomb and place it onto the game map. This funtion stops multiple bombs being on one tile simultaneously.
@@ -78,13 +97,13 @@ public class Player extends Moveable {
      */
     public void dropBomb(Map map) {
         // comment out following loop to allow multiple bombs on one tile simultaneously
-        // for (Bomb bomb : map.bombs) {
-        //     if (bomb.getX() == x &amp;&amp; bomb.getY() == y + 16) {
-        //         return;
-        //     }
-        // }
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        for (Bomb bomb : map.bombs) {</span>
+<span class="nc bnc" id="L101" title="All 4 branches missed.">            if (bomb.getX() == x &amp;&amp; bomb.getY() == y + 16) {</span>
+<span class="nc" id="L102">                return;</span>
+            }
+<span class="nc" id="L104">        }</span>
 
-<span class="nc" id="L87">        new Bomb(x, y, map);</span>
-<span class="nc" id="L88">    }</span>
+<span class="fc" id="L106">        new Bomb(x, y, map);</span>
+<span class="fc" id="L107">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -2,36 +2,72 @@
 
 import java.util.Random;
 
+/**
+ * Direction enum, provides 4 direction static states LEFT, RIGHT, UP, DOWN for moveables
+ */
+<span class="fc" id="L8">public enum Direction {</span>
+    /**
+     * The direction pointing to the West of the window (Decreasing x values)
+     */
+<span class="fc" id="L12">    LEFT {</span>
 
-<span class="fc" id="L6">public enum Direction {</span>
-<span class="fc" id="L7">    left {</span>
+      /**
+     * Returns the direction clockwise from the direction that the method is called on
+     * @return    UP direction
+     */
       @Override
-<span class="nc" id="L9">      public Direction turn() { return up;}</span>
-    },
-<span class="fc" id="L11">    right{</span>
-      @Override
-<span class="nc" id="L13">      public Direction turn() { return down;}</span>
-    },
-<span class="fc" id="L15">    up{</span>
-      @Override
-<span class="nc" id="L17">      public Direction turn() { return right;}</span>
+<span class="nc" id="L19">      public Direction turn() { return UP;}</span>
     },
 
-<span class="fc" id="L20">    down{</span>
+    /**
+     * The direction pointing to the East of the window (Increasing x values)
+     */
+<span class="fc" id="L25">    RIGHT{</span>
+
+    /**
+     * Returns the direction clockwise from the direction that the method is called on
+     * @return    DOWN direction
+     */
       @Override
-<span class="nc" id="L22">      public Direction turn() { return left;}</span>
+<span class="nc" id="L32">      public Direction turn() { return DOWN;}</span>
+    },
+
+    /**
+     * The direction pointing to the North of the window (Decreasing y values)
+     */
+<span class="fc" id="L38">    UP{</span>
+
+     /**
+     * Returns the direction clockwise from the direction that the method is called on
+     * @return    RIGHT direction
+     */
+      @Override
+<span class="nc" id="L45">      public Direction turn() { return RIGHT;}</span>
+    },
+
+    /**
+     * The direction pointing to the South of the window (Increasing y values)
+     */
+<span class="fc" id="L51">    DOWN{</span>
+
+     /**
+     * Returns the direction clockwise from the direction that the method is called on
+     * @return    LEFT direction
+     */
+      @Override
+<span class="nc" id="L58">      public Direction turn() { return LEFT;}</span>
     };
 
-<span class="fc" id="L25">    private static final Direction[] VALUES = values();</span>
-<span class="fc" id="L26">    private static final int SIZE = VALUES.length;</span>
-<span class="fc" id="L27">    private static final Random RANDOM = new Random();</span>
+<span class="fc" id="L61">    private static final Direction[] VALUES = values();</span>
+<span class="fc" id="L62">    private static final int SIZE = VALUES.length;</span>
+<span class="fc" id="L63">    private static final Random RANDOM = new Random();</span>
 
     /**
      * Returns a random Direction
      * @return a random direction
      */
     public static Direction getRandomDirection()  {
-<span class="nc" id="L34">      return VALUES[RANDOM.nextInt(SIZE)];</span>
+<span class="nc" id="L70">      return VALUES[RANDOM.nextInt(SIZE)];</span>
     }
 
     /**
@@ -39,7 +75,7 @@ import java.util.Random;
      * @return the direction clockwise from the current direction
      */
     public Direction turn() {
-<span class="nc" id="L42">        return null;</span>
+<span class="nc" id="L78">        return null;</span>
     }
 
 }

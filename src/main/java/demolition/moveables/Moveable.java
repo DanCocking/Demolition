@@ -12,7 +12,7 @@ public abstract class Moveable extends Displayable{
     /**
      * Tracks the Direction (from enum) that the movable is facing
      */
-    Direction direction = Direction.DOWN;
+    public Direction direction = Direction.DOWN;
 
     /**
      * Class constructor.

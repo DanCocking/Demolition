@@ -1,11 +1,11 @@
 {
   "levels": [
     {
-      "path": "level1.txt",
+      "path": "src/test/resources/level1.txt",
       "time": 180
     },
     {
-      "path": "level2.txt",
+      "path": "src/test/resources/level2.txt",
       "time": 180
     }
   ],

@@ -48,7 +48,7 @@ public abstract class Tile extends Displayable {
      * Runs tick on Tile
      * Currently unused and is to maintain interface consistency
      */
-    public void tick() {
+    // public void tick() {
 
-    }
+    // }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.LoadFileTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T14:14:00" hostname="dan-XPS-13-7390" time="1.472">
+<testsuite name="demolition.LoadFileTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T16:53:24" hostname="dan-XPS-13-7390" time="1.1">
   <properties/>
-  <testcase name="loadFromConfig()" classname="demolition.LoadFileTest" time="1.472"/>
+  <testcase name="loadFromConfig()" classname="demolition.LoadFileTest" time="1.1"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

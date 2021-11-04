@@ -3,7 +3,10 @@ import demolition.App;
 import demolition.Displayable;
 
 
-
+/**
+ * Tile Class, used for implementing all tiles in Tiles module. Enforces all neccesary methods
+ * and constructor
+ */
 public abstract class Tile extends Displayable {
     /**
      * Returns whether the block stops explosions from effecting the next block
@@ -32,8 +35,8 @@ public abstract class Tile extends Displayable {
      * @param y         the y-coordinate of the tile
      */
     public Tile(int x, int y) {
-<span class="fc" id="L35">        super(x,y);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L38">        super(x,y);</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Draws tile to app
@@ -45,8 +48,8 @@ public abstract class Tile extends Displayable {
      * Runs tick on Tile
      * Currently unused and is to maintain interface consistency
      */
-    public void tick() {
+    // public void tick() {
 
-<span class="fc" id="L50">    }</span>
+    // }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

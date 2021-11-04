@@ -5,60 +5,64 @@ import processing.core.PApplet;
 import processing.core.PFont;
 
 
-
+/**
+ * App class, initiates the running and setup of the entire application as well as managing user input
+ */
 public class App extends PApplet {
 
-    public static final int WIDTH = 480;
-    public static final int HEIGHT = 480;
+    private static final int WIDTH = 480;
+    private static final int HEIGHT = 480;
+    private static final int FPS = 60;
 
-    public static final int FPS = 60;
+    private Player player;
+<span class="fc" id="L18">    private boolean[] pressedKeys = new boolean[5];</span>
+<span class="fc" id="L19">    private String config = &quot;config.json&quot;;</span>
 
-    public Player player;
-
+    /**
+     * The Logic handler of the game, contains the level(Map) as well as all other parts of game logic and drawing
+     */
     public GameController gameController;
-<span class="fc" id="L19">    private boolean[] pressedKeys = new boolean[5];</span>
 
-<span class="fc" id="L21">    private String config = &quot;config.json&quot;;</span>
 
 
     /**
      * Class constructor.
      */
-<span class="fc" id="L27">    public App() {</span>
+<span class="fc" id="L31">    public App() {</span>
 
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L33">    }</span>
 
     /**
      * The method sets the size of the application
      */
     public void settings() {
-<span class="fc" id="L35">        size(WIDTH, HEIGHT);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L39">        size(WIDTH, HEIGHT);</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * The method sets the framerate, loads images, loads and sets the font
      * The method initialises the Game Controller
      */
     public void setup() {
-<span class="fc" id="L43">        frameRate(FPS);</span>
+<span class="fc" id="L47">        frameRate(FPS);</span>
         // Load images during setup
-<span class="fc" id="L45">        Images.loadImages(this);</span>
-<span class="fc" id="L46">        PFont press = createFont(&quot;PressStart2P-Regular.ttf&quot;, 20);</span>
-<span class="fc" id="L47">        textFont(press);</span>
+<span class="fc" id="L49">        Images.loadImages(this);</span>
+<span class="fc" id="L50">        PFont press = createFont(&quot;PressStart2P-Regular.ttf&quot;, 20);</span>
+<span class="fc" id="L51">        textFont(press);</span>
 
-<span class="fc" id="L49">        this.gameController = new GameController(config, this);</span>
-<span class="fc" id="L50">        this.player = gameController.player;</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L53">        this.gameController = new GameController(config, this);</span>
+<span class="fc" id="L54">        this.player = gameController.player;</span>
+<span class="fc" id="L55">    }</span>
 
     /**
      * Draws background and draws game controller
      * Calls game controller's tick() and draw() method
      */
     public void draw() {
-<span class="fc" id="L58">        background(239, 129, 0);</span>
-<span class="fc" id="L59">        this.gameController.tick();</span>
-<span class="fc" id="L60">        this.gameController.draw();</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L62">        background(239, 129, 0);</span>
+<span class="fc" id="L63">        this.gameController.tick();</span>
+<span class="fc" id="L64">        this.gameController.draw();</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * Reads keyboards input.
@@ -66,49 +70,49 @@ public class App extends PApplet {
      */
     public void keyPressed() {
 
-<span class="nc bnc" id="L69" title="All 4 branches missed.">        if (this.keyCode == 37 &amp;&amp; !pressedKeys[0]) {</span>
-<span class="nc" id="L70">            this.player.moveLeft(gameController.map);</span>
-<span class="nc" id="L71">            pressedKeys[0] = true;</span>
-<span class="nc bnc" id="L72" title="All 4 branches missed.">        } else if (this.keyCode == 38 &amp;&amp; !pressedKeys[1]) {</span>
-<span class="nc" id="L73">            this.player.moveUp(gameController.map);</span>
-<span class="nc" id="L74">            pressedKeys[1] = true;</span>
-<span class="nc bnc" id="L75" title="All 4 branches missed.">        } else if (this.keyCode == 39 &amp;&amp; !pressedKeys[2]) {</span>
-<span class="nc" id="L76">            this.player.moveRight(gameController.map);</span>
-<span class="nc" id="L77">            pressedKeys[2] = true;</span>
-<span class="nc bnc" id="L78" title="All 4 branches missed.">        } else if (this.keyCode == 40 &amp;&amp; !pressedKeys[3]) {</span>
-<span class="nc" id="L79">            this.player.moveDown(gameController.map);</span>
-<span class="nc" id="L80">            pressedKeys[3] = true;</span>
-<span class="nc bnc" id="L81" title="All 4 branches missed.">        } else if (this.keyCode == 32 &amp;&amp; !pressedKeys[4]) {</span>
-<span class="nc" id="L82">            this.player.dropBomb(gameController.map);</span>
-<span class="nc" id="L83">            pressedKeys[4] = true;</span>
+<span class="fc bfc" id="L73" title="All 4 branches covered.">        if (this.keyCode == 37 &amp;&amp; !pressedKeys[0]) {</span>
+<span class="fc" id="L74">            this.player.moveLeft(gameController.map);</span>
+<span class="fc" id="L75">            pressedKeys[0] = true;</span>
+<span class="fc bfc" id="L76" title="All 4 branches covered.">        } else if (this.keyCode == 38 &amp;&amp; !pressedKeys[1]) {</span>
+<span class="fc" id="L77">            this.player.moveUp(gameController.map);</span>
+<span class="fc" id="L78">            pressedKeys[1] = true;</span>
+<span class="fc bfc" id="L79" title="All 4 branches covered.">        } else if (this.keyCode == 39 &amp;&amp; !pressedKeys[2]) {</span>
+<span class="fc" id="L80">            this.player.moveRight(gameController.map);</span>
+<span class="fc" id="L81">            pressedKeys[2] = true;</span>
+<span class="fc bfc" id="L82" title="All 4 branches covered.">        } else if (this.keyCode == 40 &amp;&amp; !pressedKeys[3]) {</span>
+<span class="fc" id="L83">            this.player.moveDown(gameController.map);</span>
+<span class="fc" id="L84">            pressedKeys[3] = true;</span>
+<span class="pc bpc" id="L85" title="1 of 4 branches missed.">        } else if (this.keyCode == 32 &amp;&amp; !pressedKeys[4]) {</span>
+<span class="fc" id="L86">            this.player.dropBomb(gameController.map);</span>
+<span class="fc" id="L87">            pressedKeys[4] = true;</span>
         }
-<span class="nc" id="L85">    }</span>
+<span class="fc" id="L89">    }</span>
 
     /**
      * Reads keyboard input to ensure that input may not be held down.
      * Will prevent user from moving in any direction (or dropping bombs) without first releasing that key. They may give any other input whilst one is held down however.
      */
     public void keyReleased() {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (this.keyCode == 37) {</span>
-<span class="nc" id="L93">            pressedKeys[0] = false;</span>
-<span class="nc bnc" id="L94" title="All 2 branches missed.">        } else if (this.keyCode == 38) {</span>
-<span class="nc" id="L95">            pressedKeys[1] = false;</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        } else if (this.keyCode == 39) {</span>
-<span class="nc" id="L97">            pressedKeys[2] = false;</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">        } else if (this.keyCode == 40) {</span>
-<span class="nc" id="L99">            pressedKeys[3] = false;</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        } else if (this.keyCode == 32) {</span>
-<span class="nc" id="L101">            pressedKeys[4] = false;</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (this.keyCode == 37) {</span>
+<span class="fc" id="L97">            pressedKeys[0] = false;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        } else if (this.keyCode == 38) {</span>
+<span class="fc" id="L99">            pressedKeys[1] = false;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        } else if (this.keyCode == 39) {</span>
+<span class="fc" id="L101">            pressedKeys[2] = false;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        } else if (this.keyCode == 40) {</span>
+<span class="fc" id="L103">            pressedKeys[3] = false;</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        } else if (this.keyCode == 32) {</span>
+<span class="fc" id="L105">            pressedKeys[4] = false;</span>
         }
-<span class="nc" id="L103">    }</span>
+<span class="fc" id="L107">    }</span>
 
     /**
      * The method sets the config fule of the App
      * @param path  The path to the config file
      */
     public void setConfig(String path) {
-<span class="fc" id="L110">        this.config = path;</span>
-<span class="fc" id="L111">    }</span>
+<span class="fc" id="L114">        this.config = path;</span>
+<span class="fc" id="L115">    }</span>
 
 
     /**
@@ -116,7 +120,7 @@ public class App extends PApplet {
      * @param args  the command-line arguments given
      */
     public static void main(String[] args) {
-<span class="nc" id="L119">        PApplet.main(&quot;demolition.App&quot;);</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L123">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="nc" id="L124">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

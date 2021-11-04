@@ -3,8 +3,14 @@
 import demolition.App;
 import processing.core.PImage;
 
-
+/**
+ * GoalTile class, Used to implent goal tiles that are able to be displayed to window in correct position
+ * and able to be not passed by moveables nor passed by or exploded by explosions
+ */
 public class SolidTile extends Tile {
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**
@@ -14,15 +20,15 @@ public class SolidTile extends Tile {
      * @param y         the y-coordinate of the tile
      */
     public SolidTile(int x, int y) {
-<span class="fc" id="L17">        super(x, y);</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L23">        super(x, y);</span>
+<span class="fc" id="L24">    }</span>
 
     /**
      * Returns whether the block is breakble or not
      * @return false
      */
     public boolean isBreakable() {
-<span class="fc" id="L25">        return false;</span>
+<span class="fc" id="L31">        return false;</span>
     }
 
      /**
@@ -31,7 +37,7 @@ public class SolidTile extends Tile {
      * @return true
      */
     public boolean stopsExplosions() {
-<span class="fc" id="L34">        return true;</span>
+<span class="fc" id="L40">        return true;</span>
     }
 
     /**
@@ -39,7 +45,7 @@ public class SolidTile extends Tile {
      * @return false
      */
     public boolean isPassable() {
-<span class="fc" id="L42">        return false;</span>
+<span class="fc" id="L48">        return false;</span>
     }
 
 
@@ -48,8 +54,8 @@ public class SolidTile extends Tile {
      * @param app       the runnig application
      */
     public void draw(App app) {
-<span class="fc" id="L51">        app.image(SolidTile.sprite, this.x, this.y);</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L57">        app.image(SolidTile.sprite, this.x, this.y);</span>
+<span class="fc" id="L58">    }</span>
 
 
 }

@@ -4,19 +4,49 @@ import demolition.App;
 import demolition.Map;
 import processing.core.PImage;
 
-
+/**
+ * Enemy class, can represent different emeny classes including RedEnemy and YellowEnemy
+ */
 public abstract class Enemy extends Moveable{
+    /**
+     * Marks if enemy is alive or not
+     */
+<span class="fc" id="L14">    public boolean alive = true;</span>
 
-<span class="fc" id="L10">    public boolean alive = true;</span>
-<span class="fc" id="L11">    public int spriteNum = 0;</span>
-<span class="fc" id="L12">    public int timer = 0;</span>
-<span class="fc" id="L13">    public int moveTimer = 0;</span>
+    /**
+     * Tracks which phase of the movement animation Enemy is currently at
+     */
+<span class="fc" id="L19">    protected int spriteNum = 0;</span>
 
-<span class="fc" id="L15">    public final double TIME_BETWEEN_FRAMES = 0.2;</span>
-<span class="fc" id="L16">    public final double TIME_BETWEEN_MOVES = 1;</span>
+    /**
+     * Number of ticks since last animation change
+     */
+<span class="fc" id="L24">    protected int timer = 0;</span>
 
-    public PImage currSprite;
-    public Map map;
+    /**
+     * Number of ticks since last movement of the enemy
+     */
+<span class="fc" id="L29">    protected int moveTimer = 0;</span>
+
+    /**
+     * The amount of time in seconds between animation frames
+     */
+<span class="fc" id="L34">    protected final double TIME_BETWEEN_FRAMES = 0.2;</span>
+
+    /**
+     * The amount of time in seconds between movements of the enemy
+     */
+<span class="fc" id="L39">    protected final double TIME_BETWEEN_MOVES = 1;</span>
+
+    /**
+     * The current sprite to be rendered on calling the draw method
+     */
+    protected PImage currSprite;
+
+    /**
+     * The map the enemy is moving on
+     */
+    protected Map map;
 
     /**
      * Class constructor.
@@ -28,9 +58,9 @@ public abstract class Enemy extends Moveable{
      * @param map  the map the enemy is placed onto
      */
     public Enemy(int x, int y, Map map) {
-<span class="fc" id="L31">        super(x,y);</span>
-<span class="fc" id="L32">        this.map = map;</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L61">        super(x,y);</span>
+<span class="fc" id="L62">        this.map = map;</span>
+<span class="fc" id="L63">    }</span>
 
 
     /**
@@ -38,8 +68,8 @@ public abstract class Enemy extends Moveable{
      * @param app   the application that is drawn to
      */
     public void draw(App app) {
-<span class="fc" id="L41">        app.image(currSprite, x, y);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L71">        app.image(currSprite, x, y);</span>
+<span class="fc" id="L72">    }</span>
 
     /**
      * Performs tick on enemy
@@ -51,8 +81,8 @@ public abstract class Enemy extends Moveable{
      * @return the boolean value of if the enemy is alive
      */
     public void loseLife() {
-<span class="nc" id="L54">        alive = false;</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L84">        alive = false;</span>
+<span class="nc" id="L85">    }</span>
 
 
 }

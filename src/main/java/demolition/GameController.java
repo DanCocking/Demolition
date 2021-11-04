@@ -18,7 +18,11 @@ public class GameController {
     private int level = 0;
     private int timer = 0;
     private boolean playing = true;
-    private boolean win = false;
+
+    /**
+     * Tracks whether user has won the game or not
+     */
+    public boolean win = false;
 
     /**
      * holds the game state of the current level
@@ -63,7 +67,7 @@ public class GameController {
         JSONObject config = JSONObject.parse(configString);
         this.config = config;
         int lives = config.getInt("lives");
-        player = new Player(-50, -50, lives);
+        player = new Player(0, 0, lives);
         map = new Map(config.getJSONArray("levels").getJSONObject(0).getString("path"), app, this);
         time = config.getJSONArray("levels").getJSONObject(0).getInt("time");
     }

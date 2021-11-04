@@ -2,8 +2,14 @@
 import demolition.App;
 import processing.core.PImage;
 
-
+/**
+ * Empty class, Used to implent empty tiles that are able to be displayed to window in correct position
+ * and able to be passed by moveables
+ */
 public class EmptyTile extends Tile{
+    /**
+     * The image displayed when the tile is drawn to window
+     */
     public static PImage sprite;
 
     /**
@@ -13,15 +19,15 @@ public class EmptyTile extends Tile{
      * @param y         the y-coordinate of the tile
      */
     public EmptyTile(int x, int y) {
-<span class="fc" id="L16">        super(x, y);</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L22">        super(x, y);</span>
+<span class="fc" id="L23">    }</span>
 
     /**
      * Returns whether the block is breakble or not
      * @return true
      */
     public boolean isBreakable() {
-<span class="fc" id="L24">        return true;</span>
+<span class="fc" id="L30">        return true;</span>
     }
 
      /**
@@ -30,7 +36,7 @@ public class EmptyTile extends Tile{
      * @return false
      */
     public boolean stopsExplosions() {
-<span class="fc" id="L33">        return false;</span>
+<span class="fc" id="L39">        return false;</span>
     }
 
     /**
@@ -38,7 +44,7 @@ public class EmptyTile extends Tile{
      * @return true
      */
     public boolean isPassable() {
-<span class="fc" id="L41">        return true;</span>
+<span class="fc" id="L47">        return true;</span>
     }
 
     /**
@@ -46,8 +52,8 @@ public class EmptyTile extends Tile{
      * @param app       the runnig application
      */
     public void draw(App app) {
-<span class="fc" id="L49">        app.image(EmptyTile.sprite, this.x, this.y);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L55">        app.image(EmptyTile.sprite, this.x, this.y);</span>
+<span class="fc" id="L56">    }</span>
 
 
 
