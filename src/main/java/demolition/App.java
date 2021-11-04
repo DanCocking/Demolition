@@ -18,15 +18,14 @@ public class App extends PApplet {
     public GameController gameController;
     private boolean[] pressedKeys = new boolean[5];
 
+    private String config = "config.json";
+
 
     /**
      * Class constructor.
-     * The method initialises the Game Controller
      */
     public App() {
-        //TODO can only show a single level.
-        this.gameController = new GameController("config.json", this);
-        this.player = gameController.player;
+
     }
 
     /**
@@ -38,6 +37,7 @@ public class App extends PApplet {
 
     /**
      * The method sets the framerate, loads images, loads and sets the font
+     * The method initialises the Game Controller
      */
     public void setup() {
         frameRate(FPS);
@@ -45,11 +45,14 @@ public class App extends PApplet {
         Images.loadImages(this);
         PFont press = createFont("PressStart2P-Regular.ttf", 20);
         textFont(press);
+
+        this.gameController = new GameController(config, this);
+        this.player = gameController.player;
     }
 
     /**
      * Draws background and draws game controller
-     * Calls game controller's draw() method
+     * Calls game controller's tick() and draw() method
      */
     public void draw() {
         background(239, 129, 0);
@@ -97,6 +100,14 @@ public class App extends PApplet {
         } else if (this.keyCode == 32) {
             pressedKeys[4] = false;
         }
+    }
+
+    /**
+     * The method sets the config fule of the App
+     * @param path  The path to the config file
+     */
+    public void setConfig(String path) {
+        this.config = path;
     }
 
 

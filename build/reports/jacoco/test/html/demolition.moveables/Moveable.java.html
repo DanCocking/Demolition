@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Moveable.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition.moveables</a> &gt; <span class="el_source">Moveable.java</span></div><h1>Moveable.java</h1><pre class="source lang-java linenums">package demolition.moveables;
+
+import demolition.Direction;
+import demolition.Displayable;
+import demolition.Map;
+
+//TODO still need to put in things for if there is a blcok in said area; also need to stop on screen edge
+public abstract class Moveable extends Displayable{
+<span class="fc" id="L9">    Direction direction = Direction.down;</span>
+
+    /**
+     * Class constructor.
+     *
+     * Creates new Moveable at (x,y) coordinates
+     * @param x     the x-coordinate of the moveable created
+     * @param y     the y-coordinate of the moveable created
+     */
+    public Moveable(int x, int y) {
+<span class="fc" id="L19">        super(x, y);</span>
+<span class="fc" id="L20">    }</span>
+
+    /**
+     * Will move the moveable one block left (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
+    public boolean moveLeft(Map map) {
+<span class="nc" id="L28">        direction = Direction.left;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (map.tileAt(x-32, y+16).isPassable()) {</span>
+<span class="nc" id="L30">            x -= 32;</span>
+<span class="nc" id="L31">            return true;</span>
+        }
+<span class="nc" id="L33">        return false;</span>
+
+    }
+
+    /**
+     * Will move the moveable one block right (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
+    public boolean moveRight(Map map) {
+<span class="nc" id="L43">        direction = Direction.right;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (map.tileAt(x+32, y+16).isPassable()) {</span>
+<span class="nc" id="L45">            x += 32;</span>
+<span class="nc" id="L46">            return true;</span>
+        }
+<span class="nc" id="L48">        return false;</span>
+
+    }
+
+    /**
+     * Will move the moveable one block up (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
+    public boolean moveUp(Map map) {
+<span class="nc" id="L58">        direction = Direction.up;</span>
+
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (map.tileAt(x, y - 16).isPassable()) {</span>
+<span class="nc" id="L61">            y -= 32;</span>
+<span class="nc" id="L62">            return true;</span>
+        }
+<span class="nc" id="L64">        return false;</span>
+
+    }
+
+    /**
+     * Will move the moveable one block down (if block is passable) and return whether the moveable was able to move
+     * @param map   the map the moveable is placed on - where the level map is
+     * @return      the boolean value of if the move was a success
+     */
+    public boolean moveDown(Map map) {
+<span class="nc" id="L74">        direction = Direction.down;</span>
+
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (map.tileAt(x, y + 48).isPassable()) {</span>
+<span class="nc" id="L77">            y += 32;</span>
+<span class="nc" id="L78">            return true;</span>
+        }
+<span class="nc" id="L80">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

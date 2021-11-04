@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Map.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Map.java</span></div><h1>Map.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.*;
+import java.io.*;
+
+import demolition.Tiles.*;
+import demolition.moveables.Enemy;
+import demolition.moveables.Player;
+import demolition.moveables.RedEnemy;
+import demolition.moveables.YellowEnemy;
+
+
+public class Map {
+    Tile[][] levelMap;
+<span class="fc" id="L15">    ArrayList&lt;Enemy&gt; enemys = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L16">    public ArrayList&lt;Bomb&gt; bombs = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L17">    ArrayList&lt;Explosion&gt; explosions = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L19">    public int timer = 0;</span>
+    public static final int PURGE_TIME = 120;
+
+    App app;
+    Player player;
+    GameController gameController;
+
+    /**
+     * Class constructor
+     *
+     * Uses level setup file to create a map with enemies and blocks
+     *
+     * @param path              the path to level setup file
+     * @param app               the application window the map runs in
+     * @param gameController    the game controller that controls the map
+     */
+<span class="fc" id="L35">    public Map(String path, App app, GameController gameController) {</span>
+<span class="fc" id="L36">        this.app = app;</span>
+<span class="fc" id="L37">        this.gameController = gameController;</span>
+<span class="fc" id="L38">        this.player = gameController.player;</span>
+<span class="fc" id="L39">        File file = new File(path);</span>
+        Scanner scanner;
+        try {
+<span class="fc" id="L42">            scanner = new Scanner(file);</span>
+<span class="nc" id="L43">        } catch (IOException e) {</span>
+<span class="nc" id="L44">            return;</span>
+<span class="fc" id="L45">        }</span>
+<span class="fc" id="L46">        Tile[][] map = new Tile[13][15];</span>
+<span class="fc" id="L47">        int row = 0;</span>
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        while (scanner.hasNextLine()) {</span>
+<span class="fc" id="L50">            String line = scanner.nextLine();</span>
+<span class="fc" id="L51">            Tile[] rowMap = new Tile[15];</span>
+<span class="fc" id="L52">            int column = 0;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            for (char character : line.toCharArray()) {</span>
+<span class="fc" id="L54">                int x = column * 32;</span>
+<span class="fc" id="L55">                int y = 64 + row * 32;</span>
+                Tile tile;
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                if (character == 'W') {</span>
+
+<span class="fc" id="L60">                    tile = new SolidTile(x, y);</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">                } else if (character == 'B') {</span>
+<span class="fc" id="L62">                    tile = new BreakableTile(x, y);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                } else if (character == 'G') {</span>
+<span class="fc" id="L64">                    tile = new GoalTile(x, y);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">                } else if (character == ' ') {</span>
+<span class="fc" id="L66">                    tile = new EmptyTile(x, y);</span>
+                } else  {
+<span class="fc" id="L68">                    tile = new EmptyTile(x, y);</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">                    if (character == 'P') {</span>
+<span class="fc" id="L70">                        gameController.player.setX(x);</span>
+<span class="fc" id="L71">                        gameController.player.setY(y - 16);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">                    } else if (character == 'R') {</span>
+<span class="fc" id="L73">                        RedEnemy red = new RedEnemy(x, y-16, this);</span>
+<span class="fc" id="L74">                        enemys.add(red);</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">                    } else if (character == 'Y') {</span>
+<span class="fc" id="L76">                        YellowEnemy yellow = new YellowEnemy(x, y-16, this);</span>
+<span class="fc" id="L77">                        enemys.add(yellow);</span>
+                    }
+                }
+<span class="fc" id="L80">                rowMap[column] = tile;</span>
+<span class="fc" id="L81">                column++;</span>
+            }
+<span class="fc" id="L83">            map[row] = rowMap;</span>
+<span class="fc" id="L84">            row++;</span>
+<span class="fc" id="L85">        }</span>
+<span class="fc" id="L86">        this.levelMap = map;</span>
+<span class="fc" id="L87">        scanner.close();</span>
+
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * Returns tile at a given set of (x,y) coordinates
+     *
+     * @param x     the x-coordinate of the tile
+     * @param y     the y-coordinate of the tile
+     * @return      the Tile at the given coordinates
+     */
+    public Tile tileAt(int x, int y) {
+<span class="nc" id="L99">        return (levelMap[y/32 - 2][x/32]);</span>
+    }
+
+    /**
+     * Replaces tile in level map with tile supplied.
+     * The tile to be replaced is the one with the same coordinates as the one given in params
+     * @param tile  the tile that is replacing current tile of same coords
+     */
+    public void setTile(Tile tile) {
+<span class="nc" id="L108">        levelMap[tile.getY()/32 - 2][tile.getX()/32] = tile;</span>
+<span class="nc" id="L109">    }</span>
+
+    /**
+     * Runs an ingame tick on all aspects of the map.
+     *
+     * The methods ticks all tiles, the player, enemies (the player loses a life if at same coords as them),
+     * bombs, explosions (players and enemies both lose life if at same coords), checks if player has reached
+     * goal tile and occasionally purges lists of unnecessary objects to maintain performance
+     *
+     */
+    public void tick() {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (Tile[] tiles : levelMap) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            for (Tile tile : tiles) {</span>
+<span class="fc" id="L122">                tile.tick();</span>
+            }
+        }
+
+<span class="fc" id="L126">        player.tick();</span>
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        for (Enemy enemy : enemys) {</span>
+<span class="fc" id="L129">            enemy.tick();</span>
+<span class="pc bpc" id="L130" title="3 of 4 branches missed.">            if (enemy.getX() == player.getX() &amp;&amp; enemy.getY() == player.getY()) {</span>
+<span class="nc" id="L131">                player.loseLife(app.gameController);</span>
+            }
+<span class="fc" id="L133">        }</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        for (Bomb bomb : bombs) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (!bomb.exploded) {</span>
+<span class="nc" id="L136">                bomb.tick();</span>
+            }
+<span class="nc" id="L138">        }</span>
+
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        for (Explosion explosion : explosions) {</span>
+<span class="nc" id="L141">            explosion.tick();</span>
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if (explosion.burning) {</span>
+<span class="nc bnc" id="L144" title="All 4 branches missed.">                if (explosion.getX() == player.getX() &amp;&amp; explosion.getY() == player.getY() + 16) {</span>
+<span class="nc" id="L145">                    player.loseLife(app.gameController);</span>
+<span class="nc" id="L146">                    break;</span>
+                }
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                for (Enemy enemy : enemys) {</span>
+<span class="nc bnc" id="L149" title="All 4 branches missed.">                    if (explosion.getX() == enemy.getX() &amp;&amp; explosion.getY() == enemy.getY() + 16) {</span>
+<span class="nc" id="L150">                        enemy.loseLife();</span>
+                    }
+<span class="nc" id="L152">                }</span>
+            }
+<span class="nc" id="L154">        }</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (timer++ &gt; PURGE_TIME) {</span>
+<span class="nc" id="L156">            purge();</span>
+        }
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        for (Tile[] tiles : levelMap) {</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">            for (Tile tile : tiles) {</span>
+<span class="pc bpc" id="L160" title="1 of 6 branches missed.">                if (tile.getX() == player.getX() &amp;&amp; tile.getY() == player.getY() + 16 &amp;&amp; tile.getClass() == demolition.Tiles.GoalTile.class) {</span>
+<span class="nc" id="L161">                    gameController.levelComplete();</span>
+                }
+            }
+        }
+
+<span class="fc" id="L166">    }</span>
+
+    /**
+     * Will draw blocks, bombs, enemies, explosions and player to the window
+     * @param app       the application window to be drawn to
+     */
+    public void draw(App app) {
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        for (int i = 0; i &lt; levelMap.length; i++) {</span>
+
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            for (int j = 0; j &lt; levelMap[i].length; j++) {</span>
+<span class="fc" id="L176">                levelMap[i][j].draw(app);</span>
+                // System.out.print(levelMap[i][j] == null);
+                }
+        }
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        for (Bomb bomb : bombs) {</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (!bomb.exploded) {</span>
+<span class="nc" id="L182">                bomb.draw(app);</span>
+            }
+<span class="nc" id="L184">        }</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        for (Enemy enemy : enemys ) {</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">            if (enemy.alive) {</span>
+<span class="fc" id="L187">                enemy.draw(app);</span>
+            }
+<span class="fc" id="L189">        }</span>
+
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        for (Explosion explosion : explosions) {</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if (explosion.burning) {</span>
+<span class="nc" id="L193">                explosion.draw(app);</span>
+            }
+<span class="nc" id="L195">        }</span>
+
+<span class="fc" id="L197">        player.draw(app);</span>
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Removes bombs that are exploded, explosions that are no longer present, and non alive enemies from their respective lists
+     */
+    private void purge() {
+<span class="nc" id="L204">        bombs.removeIf((bomb) -&gt; (bomb.exploded));</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        explosions.removeIf((explosion) -&gt; (!explosion.burning));</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        enemys.removeIf((enemy) -&gt; (!enemy.alive));</span>
+
+<span class="nc" id="L208">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

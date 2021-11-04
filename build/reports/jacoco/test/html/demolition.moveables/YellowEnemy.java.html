@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>YellowEnemy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition.moveables</a> &gt; <span class="el_source">YellowEnemy.java</span></div><h1>YellowEnemy.java</h1><pre class="source lang-java linenums">package demolition.moveables;
+
+import demolition.Direction;
+import demolition.Map;
+import processing.core.PImage;
+
+public class YellowEnemy extends Enemy {
+<span class="fc" id="L8">    public static PImage[][] sprites = new PImage[4][4];</span>
+
+        /**
+     * Class constructor.
+     *
+     * Initialises yellow enemy on map at (x,y) coordinates and first sprite set
+     * @param x         the x-coordinate of the YellowEnemy
+     * @param y         the y-coordinate of the YellowEnemy
+     * @param map       the map the enemy is placed onto
+     */
+    public YellowEnemy(int x, int y, Map map) {
+<span class="fc" id="L19">        super(x, y, map);</span>
+<span class="fc" id="L20">        this.currSprite = sprites[3][0];</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     * Runs at gametick to change enemy sprites, move enemy and rotate the enemy clockwise whenever it hits a wall
+      */
+    @Override
+    public void tick() {
+<span class="fc" id="L28">        moveTimer++;</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (moveTimer &gt; TIME_BETWEEN_MOVES * 60) {</span>
+<span class="nc" id="L30">            boolean moved = false;</span>
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            while (!moved) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                if (direction == Direction.left) {</span>
+<span class="nc" id="L34">                    moved = moveLeft(map);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                } else if (direction == Direction.up) {</span>
+<span class="nc" id="L36">                    moved = moveUp(map);</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                } else if (direction == Direction.right) {</span>
+<span class="nc" id="L38">                    moved = moveRight(map);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                } else if (direction == Direction.down) {</span>
+<span class="nc" id="L40">                    moved = moveDown(map);</span>
+                }
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                if (!moved) {</span>
+<span class="nc" id="L43">                    direction =  direction.turn();</span>
+                }
+            }
+<span class="nc" id="L46">            moveTimer = 0;</span>
+        }
+
+<span class="fc" id="L49">        timer++;</span>
+
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (timer &gt; TIME_BETWEEN_FRAMES * 60) {</span>
+<span class="nc" id="L52">            spriteNum = ((spriteNum + 1) % 4);</span>
+<span class="nc" id="L53">            timer = 0;</span>
+        }
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (direction == Direction.left) {</span>
+<span class="nc" id="L56">            currSprite = sprites[0][spriteNum];</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        } else if (direction == Direction.up) {</span>
+<span class="nc" id="L58">            currSprite = sprites[1][spriteNum];</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        } else if (direction == Direction.right) {</span>
+<span class="nc" id="L60">            currSprite = sprites[2][spriteNum];</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        } else if (direction == Direction.down) {</span>
+<span class="fc" id="L62">            currSprite = sprites[3][spriteNum];</span>
+        }
+<span class="fc" id="L64">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
